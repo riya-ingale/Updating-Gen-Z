@@ -9,6 +9,9 @@ import secrets
 import os
 from email.message import EmailMessage
 import datetime
+from urllib.request import Request, urlopen
+from bs4 import BeautifulSoup
+import requests
 
 app = Flask(__name__)
 
@@ -26,29 +29,29 @@ db = SQLAlchemy(app)
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    profile = db.Column(db.LargeBinary, nullable=False)
+    profile = db.Column(db.LargeBinary, nullable=True)
     name = db.Column(db.String(200))
-    about = db.Column(db.String(500), nullable=False)
+    about = db.Column(db.String(500), nullable=True)
     username = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
     mail_id = db.Column(db.String(200), unique=True)
-    expertise = db.Column(db.String(200), nullable=False)
-    grammer_points = db.Column(db.Integer, nullable=False)
-    history_points = db.Column(db.Integer, nullable=False)
-    geography_points = db.Column(db.Integer, nullable=False)
-    humanresource_points = db.Column(db.Integer, nullable=False)
-    law_points = db.Column(db.Integer, nullable=False)
-    psychology_points = db.Column(db.Integer, nullable=False)
-    economy_points = db.Column(db.Integer, nullable=False)
-    agriculture_points = db.Column(db.Integer, nullable=False)
-    science_points = db.Column(db.Integer, nullable=False)
-    sociology_points = db.Column(db.Integer, nullable=False)
-    politics_points = db.Column(db.Integer, nullable=False)
+    expertise = db.Column(db.String(200), nullable=True)
+    grammer_points = db.Column(db.Integer, nullable=True)
+    history_points = db.Column(db.Integer, nullable=True)
+    geography_points = db.Column(db.Integer, nullable=True)
+    humanresource_points = db.Column(db.Integer, nullable=True)
+    law_points = db.Column(db.Integer, nullable=True)
+    psychology_points = db.Column(db.Integer, nullable=True)
+    economy_points = db.Column(db.Integer, nullable=True)
+    agriculture_points = db.Column(db.Integer, nullable=True)
+    science_points = db.Column(db.Integer, nullable=True)
+    sociology_points = db.Column(db.Integer, nullable=True)
+    politics_points = db.Column(db.Integer, nullable=True)
 
 
 class Questions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    question = db.Column(db.String(200), nullable=False, unique=True)
+    question = db.Column(db.String(200), nullable=True, unique=True)
     choice1 = db.Column(db.String(200))
     choice2 = db.Column(db.String(200))
     choice3 = db.Column(db.String(200))
@@ -157,21 +160,43 @@ def index():
     return render_template('index.html', current_user=current_user)
 
 
+# @app.route('/news', methods=['GET', 'POST'])
+# def news():
+#     root = "https://www.google.com/"
+#     link = "https://www.google.com/search?q=trump&rlz=1C1GCEA_enIN873IN873&sxsrf=ALeKk02ZYGtgHPyh7JDjJ83dVcIWWQr5TQ:1619537882922&source=lnms&tbm=nws&sa=X&ved=2ahUKEwiJu9jh4J7wAhX36XMBHTgtAtgQ_AUoAXoECAEQAw&biw=767&bih=744&dpr=1.25"
+
+#     req = Request(link, headers={'User-Agent': 'Mozilla/5.0'})
+#     webpage = urlopen(req).read()
+#     with requests.Session() as c:
+#         soup = BeautifulSoup(webpage, 'html5lib')
+
+#         for item in soup.find_all('div', attrs={'class': 'ZINbbc xpd O9g5cc uUPGi'}):
+#             raw_link = (item.find('a', href=True)['href'])
+#             link = (raw_link.split("/url?q=")[1]).split('&sa=U&')[0]
+#             title = (item.find('div', attrs={
+#                      'class': 'BNeawe vvjwJb AP7Wnd'}).get_text())
+#             description = (
+#                 item.find('div', attrs={'class': 'BNeawe s3v9rd AP7Wnd'}))
+#             time = description.split(' . ')[0]
+#             descript = description.split(' . ')[1]
+#             print(title)
+#             print(descript)
+#             print(link)
+#             print(time)
+
+
 # @app.route('/search', methods=['POST', 'GET'])
 # def search():
 #     if request.method == "POST":
 #         search_string = request.form['search_string']
 #         search = "{0}".format(search_string)
 #         search = search+'%'
-
 #         results = Songs.query.filter(
 #             or_(Songs.name.like(search), Songs.artist.like(search))).all()
 #         if len(results) == 0:
 #             flash("No such song availabe!")
 #         return render_template('search.html', results=results)
 #     return render_template('search.html')
-
-
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
