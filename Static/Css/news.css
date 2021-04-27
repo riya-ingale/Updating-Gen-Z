@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #B1A296;
+  font-size: 16px;
+}
+
+.blog-card {
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 2px 4px 8px 0 rgba(0, 0, 0, 0.2),
+              -1px -1px 10px 0 rgba(0, 0, 0, 0.2);
+  width: 300px;
+  margin: 2vh;
+}
+
+.header {
+  background-color: #1E4258;
+  color: #ffffff;
+  text-align: center;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.category {
+  margin: 0;
+  padding: 1vw;
+  color: #fff;
+  font-size: 1em;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+  text-transform: uppercase;
+}
+
+.picture-wrapper {
+  height: 30vh;
+  width: 100%;
+  background-image: url(http://www.bghtechpartner.com/wp-content/uploads/2016/12/buenosaires-puerto-madero.jpg);
+  background-size: cover;
+}
+
+.text-wrapper {
+  font-family: sans-serif;
+}
+
+.title {
+  font-size: 1.25em;
+  padding: 6vh 4vh 2vh 4vh;
+}
+
+.author {
+  font-size: 0.75em;
+  padding-left: 4vh;
+  font-style: italic;
+}
+
+.text {
+  font-size: 1em;
+  padding: 4vh 4vh;
+}
+
+.hover {
+  font-size: 1.5625em;
+}
+
+
+@media screen and (min-width: 700px) {
+  .blog-card {
+    width: 600px;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: row;
+  }
+    
+  .picture-wrapper {
+    height: auto;
+    width: 60%;
+    border-bottom-left-radius: 10px;
+  }
+
+  .title {
+    padding-right: 10vh;
+  }
+}
+/* Search */
+  .form-control-borderless {
+      border: none;
+  }
+  
+  .form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+  }
+/* End Search */
+
+/*Footer*/
+.container-fluid {
+  overflow: hidden;
+  margin-top: 250px;
+  background: #262626;
+  color: #627482 !important;
+  margin-bottom: 0;
+  padding-bottom: 0
+}
+
+small {
+  font-size: calc(12px + (15 - 12) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+.bold-text {
+  color: #989c9e !important
+}
+
+.mt-55 {
+  margin-top: calc(50px + (60 - 50) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+h3 {
+  font-size: calc(34px + (40 - 34) * ((100vw - 360px) / (1600 - 360))) !important
+}
+
+.social {
+  font-size: 21px !important
+}
+
+.rights {
+  font-size: calc(10px + (12 - 10) * ((100vw - 360px) / (1600 - 360))) !important
+}
+/*End Footer*/  
