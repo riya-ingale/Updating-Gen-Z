@@ -12,6 +12,8 @@ import datetime
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import requests
+from pygooglenews import GoogleNews
+
 
 app = Flask(__name__)
 
@@ -160,43 +162,42 @@ def index():
     return render_template('index.html', current_user=current_user)
 
 
-# @app.route('/news', methods=['GET', 'POST'])
-# def news():
-#     root = "https://www.google.com/"
-#     link = "https://www.google.com/search?q=trump&rlz=1C1GCEA_enIN873IN873&sxsrf=ALeKk02ZYGtgHPyh7JDjJ83dVcIWWQr5TQ:1619537882922&source=lnms&tbm=nws&sa=X&ved=2ahUKEwiJu9jh4J7wAhX36XMBHTgtAtgQ_AUoAXoECAEQAw&biw=767&bih=744&dpr=1.25"
+@app.route('/news', methods=['GET', 'POST'])
+def news():
+    if request.method == "GET":
+        stories = []
+        gn = GoogleNews(country='India')
+        top = gn.top_news()
+        newsitem = top['entries']
+        for item in newsitem:
+            story = {
+                'title': item.title,
+                'link': item.link,
+                'published': item.published
+            }
+            stories.append(story)
+    if request.method == "POST":
+        query = request.form.get('query')
+        stories = []
+        gn = GoogleNews(country='India')
+        search = gn.search(query, when='24h')
+        newsitem = search['entries']
+        for item in newsitem:
+            story = {
+                'title': item.title,
+                'link': item.link,
+                'published': item.published
+            }
+            stories.append(story)
+    return render_template('news.html', stories=stories, current_user=current_user)
 
-#     req = Request(link, headers={'User-Agent': 'Mozilla/5.0'})
-#     webpage = urlopen(req).read()
-#     with requests.Session() as c:
-#         soup = BeautifulSoup(webpage, 'html5lib')
 
-#         for item in soup.find_all('div', attrs={'class': 'ZINbbc xpd O9g5cc uUPGi'}):
-#             raw_link = (item.find('a', href=True)['href'])
-#             link = (raw_link.split("/url?q=")[1]).split('&sa=U&')[0]
-#             title = (item.find('div', attrs={
-#                      'class': 'BNeawe vvjwJb AP7Wnd'}).get_text())
-#             description = (
-#                 item.find('div', attrs={'class': 'BNeawe s3v9rd AP7Wnd'}))
-#             time = description.split(' . ')[0]
-#             descript = description.split(' . ')[1]
-#             print(title)
-#             print(descript)
-#             print(link)
-#             print(time)
+@app.route('/addblog/<int:user_id>', methods=['POST', 'GET'])
+def addblog(user_id):
+
+    return render_template('addblog.html')
 
 
-# @app.route('/search', methods=['POST', 'GET'])
-# def search():
-#     if request.method == "POST":
-#         search_string = request.form['search_string']
-#         search = "{0}".format(search_string)
-#         search = search+'%'
-#         results = Songs.query.filter(
-#             or_(Songs.name.like(search), Songs.artist.like(search))).all()
-#         if len(results) == 0:
-#             flash("No such song availabe!")
-#         return render_template('search.html', results=results)
-#     return render_template('search.html')
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
