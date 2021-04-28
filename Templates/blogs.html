@@ -21,14 +21,14 @@
 	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="41"></a>
 	            <div class="collapse navbar-collapse" id="Navbar">
 					<ul class="navbar-nav mr auto">
-						<li class="nav-item"><a class="nav-link" href="index.html"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-						  <li class="nav-item"><a class="nav-link" href="blogs.html"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
-						  <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+						<li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
+						  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+						  <li class="nav-item"><a class="nav-link" href="/addblog"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
 						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
-						  <li class="nav-item"><a class="nav-link" href="search.html"><i class="fa fa-sign-out"></i> </span>Search</a></li>
-						<li class="nav-item"><a class="nav-link" href="news.html"><i class="fa fa-file"></i> </span>News </a></li>
+						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> </span>Search</a></li>
+						<li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
-								  <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+						<li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
 						</ul>
 	            </div>
 	            <div>
@@ -45,7 +45,7 @@
 	<div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
       <h1 style="color: #000;text-align: center;">Blogs</h1><br>
-        <form class="card card-sm" style="background-color: #585C61;">
+        <form class="card card-sm" style="background-color: #585C61;" method="POST">
             <div class="card-body row no-gutters align-items-center">
               
                 <div class="col-auto">
@@ -53,11 +53,11 @@
                 </div>
                 <!--end of col-->
                 <div class="col">
-                    <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" style="background-color: #B1A296;">
+                    <input name="query" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" style="background-color: #B1A296;"/>
                 </div>
                 <!--end of col-->
                 <div class="col-auto">
-                    <button class="btn btn-lg " type="submit" style="background-color: #1E4258;color: #fff;">Search</button>
+                    <button class="btn btn-lg" formaction="/searchblogs" type="submit" style="background-color: #1E4258;color: #fff;">Search</button>
                 </div>
                 <!--end of col-->
             </div>
@@ -70,27 +70,29 @@
 <div class="container row">
 	<main class="container">
 		<div class="h1 text-center" id="pageHeaderTitle"></div>
-	
+		{% for blog in blogs %}
 		<article class="postcard blue">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
 			</a>
 			<div class="postcard__text">
-				<h1 class="postcard__title blue"><a href="#">Blog Title</a></h1>
+				<h1 class="postcard__title blue"><a href="#">{{blog.title }}</a></h1>
 				<div class="postcard__subtitle small">
 					<time datetime="2020-05-25 12:00:00">
-						<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
+						<i class="fas fa-calendar-alt mr-2"></i>{{blog.date}}
 					</time>
 				</div>
 				<div class="postcard__bar"></div>
-				<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
+				<div class="postcard__preview-txt">{{blog.post}}</div>
 				<ul class="postcard__tagbox">
-					<li class="tag__item">Domain</li>
-					<li class="tag__item">User Name</li>
-					<li class="tag__item play blue"><a href="#">Score</a></li>
+					<li class="tag__item">{{ blog.topic }}</li>
+					<li class="tag__item">{{ blog.user_id }}</li>
+					<li class="tag__item play blue"><a href="#">Score -  {{ blog.likes }}</a></li>
 				</ul>
 			</div>
 		</article>
+		{% endfor %}
+
 		<article class="postcard red">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />	
@@ -111,6 +113,7 @@
 				</ul>
 			</div>
 		</article>
+
 		<article class="postcard green">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/500/501" alt="Image Title" />

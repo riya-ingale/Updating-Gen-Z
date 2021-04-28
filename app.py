@@ -63,12 +63,13 @@ class Questions(db.Model):
 
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    blog_name = db.Column(db.String(200))
     user_id = db.Column(db.Integer)
-    post = db.Column(db.String(1500))
-    picture = db.Column(db.LargeBinary)
-    like = db.Column(db.Integer, default=0)
+    title = db.Column(db.String(200))
     topic = db.Column(db.String(200))
+    post = db.Column(db.String(1500))
+    picture = db.Column(db.LargeBinary, nullable=True)
+    likes = db.Column(db.Integer, default=0)
+    date = db.Column(db.String(50))
 
 
 @login_manager.user_loader
@@ -194,8 +195,49 @@ def news():
 
 @app.route('/addblog/<int:user_id>', methods=['POST', 'GET'])
 def addblog(user_id):
+    if request.method == "POST":
+        user_id = user_id
+        title = request.form['title']
+        domain = request.form['domain']
+        date = datetime.datetime.today()
+        date = date.strftime("%d %B, %Y")
+        post = request.form['post']
 
-    return render_template('addblog.html')
+        new_blog = Blog(user_id=user_id, title=title,
+                        topic=domain, post=post, date=date)
+        db.session.add(new_blog)
+        db.session.commit()
+        return redirect('/allblogs')
+
+    return render_template('addblog.html', current_user=current_user)
+
+
+@app.route('/allblogs', methods=['POST', 'GET'])
+def allblogs():
+    blogs = Blog.query.all()
+    for blog in blogs:
+        user = Users.query.filter_by(id=blog.user_id).first()
+        blog.user_id = user.username
+    return render_template('blogs.html', blogs=blogs)
+
+
+@app.route('/searchblogs', methods=['POST', 'GET'])
+def searchblogs():
+    if request.method == "POST":
+        query = request.form['query']
+        search = "{0}".format(query)
+        search = search+'%'
+
+        blogs = Blog.query.filter(
+            or_(Blog.title.like(search), Blog.topic.like(search), Blog.post.like(search))).all()
+        if len(blogs) == 0:
+            flash("No such Blog availabe!")
+
+        for blog in blogs:
+            user = Users.query.filter_by(id=blog.user_id).first()
+            blog.user_id = user.username
+
+        return render_template('blogs.html', blogs=blogs)
 
 
 if __name__ == "__main__":
