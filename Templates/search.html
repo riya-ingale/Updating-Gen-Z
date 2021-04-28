@@ -22,11 +22,10 @@
 	            <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr auto">
 	                <li class="nav-item"><a class="nav-link" href="index.html"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-	                  <li class="nav-item"><a class="nav-link" href="blogs.html"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
 	                  <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
 	                  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="search.html"><i class="fa fa-sign-out"></i> </span>Search</a></li>
-                    <li class="nav-item"><a class="nav-link" href="news.html"><i class="fa fa-file"></i> </span>News </a></li>
+                    <li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
 					          <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
 	                </ul>
@@ -41,7 +40,7 @@
     <div class="row justify-content-center"> 
         <div class="col-12 col-md-10 col-lg-8">
           <h1 style="color: #000;text-align: center;">Search with UserName</h1><br>
-            <form class="card card-sm" style="background-color: #585C61;">
+            <form class="card card-sm" style="background-color: #585C61;" method="POST">
                 <div class="card-body row no-gutters align-items-center">
                   
                     <div class="col-auto">
@@ -49,11 +48,11 @@
                     </div>
                     <!--end of col-->
                     <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" style="background-color: #B1A296;">
+                        <input class="form-control form-control-lg form-control-borderless" name="query" type="search" placeholder="Search topics or keywords" style="background-color: #B1A296;">
                     </div>
                     <!--end of col-->
                     <div class="col-auto">
-                        <button class="btn btn-lg " type="submit" style="background-color: #1E4258;color: #fff;">Search</button>
+                        <button class="btn btn-lg " type="submit" formaction="/searchusers" style="background-color: #1E4258;color: #fff;">Search</button>
                     </div>
                     <!--end of col-->
                 </div>
@@ -69,27 +68,29 @@
             </div>
             <!-- end row -->
             <div class="row">
+                {% for user in users %}
                 <div class="col-lg-4">
                     <div class="text-center card-box">
                         <div class="member-card pt-2 pb-2">
                             <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
                             <div class="">
-                                <h4>User Name</h4>
-                                <p class="text-muted">Mobile No. <span>| </span><span><a href="#" class="text-pink">Mail ID</a></span></p>
+                                <h3>{{user.username}}</h3>
+                                <h4>{{ user.name }}</h4>
+                                <p class="text-muted">{{user.mobno}}<span>| </span><span><a href="#" class="text-pink">{{user.mail_id}}</a></span></p>
                             </div>
                             
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Expertise</button>
+                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">{{user.expertise}}</button>
                             <div class="mt-4">
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="mt-3">
-                                            <h4>2563</h4>
+                                            <h4>{{user.score}}</h4>
                                             <p class="mb-0 text-muted">Score</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="mt-3">
-                                            <h4>1125</h4>
+                                            <h4>{{user.blogsnumber}}</h4>
                                             <p class="mb-0 text-muted">Blogs Written</p>
                                         </div>
                                     </div>
@@ -98,67 +99,12 @@
                         </div>
                     </div>
                 </div>
+
+                {% endfor %}
                 <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>User Name</h4>
-                                <p class="text-muted">Mobile No. <span>| </span><span><a href="#" class="text-pink">Mail ID</a></span></p>
-                            </div>
-                            
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Expertise</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="mt-3">
-                                            <h4>2563</h4>
-                                            <p class="mb-0 text-muted">Score</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mt-3">
-                                            <h4>1125</h4>
-                                            <p class="mb-0 text-muted">Blogs Written</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               
                 <!-- end col -->
-                <div class="col-lg-4">
-                    <div class="text-center card-box">
-                        <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
-                            <div class="">
-                                <h4>User Name</h4>
-                                <p class="text-muted">Mobile No. <span>| </span><span><a href="#" class="text-pink">Mail ID</a></span></p>
-                            </div>
-                            
-                            <button type="button" class="btn btn-primary mt-3 btn-rounded waves-effect w-md waves-light">Expertise</button>
-                            <div class="mt-4">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="mt-3">
-                                            <h4>2563</h4>
-                                            <p class="mb-0 text-muted">Score</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="mt-3">
-                                            <h4>1125</h4>
-                                            <p class="mb-0 text-muted">Blogs Written</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end col -->
+
             </div>
             <!-- end row -->
             

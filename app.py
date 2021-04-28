@@ -37,7 +37,10 @@ class Users(UserMixin, db.Model):
     username = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
     mail_id = db.Column(db.String(200), unique=True)
+    mobno = db.Column(db.String(200))
+    blogsnumber = db.Column(db.Integer)
     expertise = db.Column(db.String(200), nullable=True)
+
     grammer_points = db.Column(db.Integer, nullable=True)
     history_points = db.Column(db.Integer, nullable=True)
     geography_points = db.Column(db.Integer, nullable=True)
@@ -49,6 +52,7 @@ class Users(UserMixin, db.Model):
     science_points = db.Column(db.Integer, nullable=True)
     sociology_points = db.Column(db.Integer, nullable=True)
     politics_points = db.Column(db.Integer, nullable=True)
+    score = db.Column(db.Integer)
 
 
 class Questions(db.Model):
@@ -59,6 +63,7 @@ class Questions(db.Model):
     choice3 = db.Column(db.String(200))
     choice4 = db.Column(db.String(200))
     answer = db.Column(db.String(200))
+    domain = db.Column(db.String(200))
 
 
 class Blog(db.Model):
@@ -215,6 +220,11 @@ def addblog(user_id):
                         topic=domain, post=post, date=date)
         db.session.add(new_blog)
         db.session.commit()
+        user = Users.query.filter_by(id=user_id).first()
+        if user.blogsnumber == None:
+            user.blogsnumber = 1
+        user.blogsnumber = user.blogsnumber + 1
+        db.session.commit()
         return redirect('/allblogs')
 
     return render_template('addblog.html', current_user=current_user)
@@ -223,9 +233,10 @@ def addblog(user_id):
 @app.route('/allblogs', methods=['POST', 'GET'])
 def allblogs():
     blogs = Blog.query.all()
-    for blog in blogs:
-        user = Users.query.filter_by(id=blog.user_id).first()
-        blog.user_id = user.username
+    if blogs:
+        for blog in blogs:
+            user = Users.query.filter_by(id=blog.user_id).first()
+            blog.user_id = user.username
     return render_template('blogs.html', blogs=blogs)
 
 
@@ -246,6 +257,22 @@ def searchblogs():
             blog.user_id = user.username
 
         return render_template('blogs.html', blogs=blogs, current_user=current_user)
+
+
+@app.route('/searchusers', methods=['POST', 'GET'])
+def searchusers():
+    if request.method == "POST":
+        query = request.form['query']
+        search = "{0}".format(query)
+        search = search+'%'
+
+        users = Users.query.filter(
+            or_(Users.name.like(search), Users.username.like(search), Users.about.like(search))).all()
+        if len(users) == 0:
+            flash("No such Blog availabe!")
+    else:
+        users = Users.query.all()
+    return render_template('search.html', current_user=current_user, users=users)
 
 
 if __name__ == "__main__":
