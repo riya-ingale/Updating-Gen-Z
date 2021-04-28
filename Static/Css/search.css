@@ -44,27 +44,29 @@ body {
     border-radius: 3px;
     padding: 4px 55px 4px 15px;
     position: static;
-    background: #fff;
+    
     border: 1px solid #ddd;
     -webkit-transition: all 200ms ease-in-out;
     -moz-transition: all 200ms ease-in-out;
     transition: all 200ms ease-in-out;
   }
   .search-box.hovered, .search-box:hover, .search-box:active {
-    border: 1px solid #aaa;
+    border: 5px solid #aaa;
   }
   .search-box input[type=text] {
     border: none;
     box-shadow: none;
     display: inline-block;
     padding: 0;
-    background: transparent;
+    height: 2em;
+    background: #B1A296;
   }
   .search-box input[type=text]:hover, .search-box input[type=text]:focus, .search-box input[type=text]:active {
     box-shadow: none;
   }
-  .search-box .search-btn {
-    position: absolute;
+  .search-box {
+    position: relative;
+    width: 500px;
     right: 2px;
     top: 2px;
     color: #aaa;
@@ -75,9 +77,19 @@ body {
     -moz-transition: all 200ms ease-in-out;
     transition: all 200ms ease-in-out;
   }
+  .search-btn{
+    position: relative;
+    color: rgb(8, 67, 90);
+    border-radius: 3px;
+    font-size: 21px;
+    padding: 5px 10px 1px;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out; 
+  }
   .search-box .search-btn:hover {
     color: #fff;
-    background-color: #8FBE00;
+    background-color: #022140;
   }
   /* End Search*/
 
@@ -87,7 +99,7 @@ body {
 } */
 
 .padding {
-    padding: 3rem !important
+    padding: 3rem;
 }
 
 .user-card-full {
@@ -216,3 +228,26 @@ h6 {
     transition: all 0.3s ease-in-out
 }
   /* End Profile Cards */
+  /* Responsive */
+  /* // Small devices (landscape phones, 576px and up) */
+  @media (max-width: 576px) 
+  {
+    .page-content{
+        width: 100%;
+        margin: 0px;
+        padding: 0px;    
+    }
+    .card-block
+    {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    } 
+    .padding 
+    {
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+}
+  /* End responsive */
