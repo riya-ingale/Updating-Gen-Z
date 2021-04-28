@@ -22,10 +22,19 @@
 	            <div class="collapse navbar-collapse" id="Navbar">
 					<ul class="navbar-nav mr auto">
 						<li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-						  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
-						  <li class="nav-item"><a class="nav-link" href="/addblog"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+						  <li class="nav-i
+						  tem"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+
+						{% if current_user.get_authenticated %}
+						  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+						{% endif %}
+
 						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+
+						{%if current_user.get_authenticated %}
 						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> </span>Search</a></li>
+						{% endif %}
+
 						<li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
 						<li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>

@@ -72,6 +72,14 @@ class Blog(db.Model):
     date = db.Column(db.String(50))
 
 
+class Tasks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer)
+    task = db.Column(db.String(200))
+    date = db.Column(db.Date)
+    time = db.Column(db.Time)
+
+
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
@@ -144,7 +152,7 @@ def login():
             if check_password_hash(user.password, password):
                 login_user(user)
                 print("Login Done!")
-                return redirect("/")
+                return redirect("/allblogs")
             else:
                 flash("Incorrect password", "danger")
                 return redirect("login")
@@ -237,7 +245,7 @@ def searchblogs():
             user = Users.query.filter_by(id=blog.user_id).first()
             blog.user_id = user.username
 
-        return render_template('blogs.html', blogs=blogs)
+        return render_template('blogs.html', blogs=blogs, current_user=current_user)
 
 
 if __name__ == "__main__":
