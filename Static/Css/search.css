@@ -1,5 +1,5 @@
 body {
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
     min-height: 100vh;
@@ -33,221 +33,68 @@ body {
     right: 0;
     background: #373d47;
   }
-  /* Name */
-.container {
-    padding: 40px;
-  }
-  
-  .search-box {
-    display: inline-block;
-    width: 100%;
-    border-radius: 3px;
-    padding: 4px 55px 4px 15px;
-    position: static;
-    
-    border: 1px solid #ddd;
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    transition: all 200ms ease-in-out;
-  }
-  .search-box.hovered, .search-box:hover, .search-box:active {
-    border: 5px solid #aaa;
-  }
-  .search-box input[type=text] {
+/* Search */
+.form-control-borderless {
     border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
     box-shadow: none;
-    display: inline-block;
-    padding: 0;
-    height: 2em;
-    background: #B1A296;
-  }
-  .search-box input[type=text]:hover, .search-box input[type=text]:focus, .search-box input[type=text]:active {
-    box-shadow: none;
-  }
-  .search-box {
-    position: relative;
-    width: 500px;
-    right: 2px;
-    top: 2px;
-    color: #aaa;
-    border-radius: 3px;
-    font-size: 21px;
-    padding: 5px 10px 1px;
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    transition: all 200ms ease-in-out;
-  }
-  .search-btn{
-    position: relative;
-    color: rgb(8, 67, 90);
-    border-radius: 3px;
-    font-size: 21px;
-    padding: 5px 10px 1px;
-    -webkit-transition: all 200ms ease-in-out;
-    -moz-transition: all 200ms ease-in-out;
-    transition: all 200ms ease-in-out; 
-  }
-  .search-box .search-btn:hover {
-    color: #fff;
-    background-color: #022140;
-  }
-  /* End Search*/
+}
+/* End Search */
 
   /*Profile  Cards */
   /* body {
     background-color: #f9f9fa
 } */
 
-.padding {
-    padding: 3rem;
+/* Cards */
+.card-box {
+    padding: 20px;
+    border-radius: 3px;
+    margin-bottom: 30px;
+    background-color: #fff;
 }
 
-.user-card-full {
-    overflow: hidden
+.social-links li a {
+    border-radius: 50%;
+    color: rgba(121, 121, 121, .8);
+    display: inline-block;
+    height: 30px;
+    line-height: 27px;
+    border: 2px solid rgba(121, 121, 121, .5);
+    text-align: center;
+    width: 30px
 }
 
-.card {
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-    box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-    border: none;
-    margin-bottom: 30px
+.social-links li a:hover {
+    color: #797979;
+    border: 2px solid #797979
 }
-
-.m-r-0 {
-    margin-right: 0px
+.thumb-lg {
+    height: 88px;
+    width: 88px;
 }
-
-.m-l-0 {
-    margin-left: 0px
+.img-thumbnail {
+    padding: .25rem;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: .25rem;
+    max-width: 100%;
+    height: auto;
 }
-
-.user-card-full .user-profile {
-    border-radius: 5px 0 0 5px
+.text-pink {
+    color: #ff679b!important;
 }
-
-.bg-c-lite-green {
-    background: -webkit-gradient(linear, left top, right top, from(#f29263), to(#ee5a6f));
-    background: linear-gradient(to right, #ee5a6f, #f29263)
+.btn-rounded {
+    border-radius: 2em;
 }
-
-.user-profile {
-    padding: 20px 0
-}
-
-.card-block {
-    padding: 1.25rem
-}
-
-.m-b-25 {
-    margin-bottom: 25px
-}
-
-.img-radius {
-    border-radius: 5px
-}
-
-h6 {
-    font-size: 14px
-}
-
-.card .card-block p {
-    line-height: 25px
-}
-
-@media only screen and (min-width: 1400px) {
-    p {
-        font-size: 14px
-    }
-}
-
-.card-block {
-    padding: 1.25rem
-}
-
-.b-b-default {
-    border-bottom: 1px solid #e0e0e0
-}
-
-.m-b-20 {
-    margin-bottom: 20px
-}
-
-.p-b-5 {
-    padding-bottom: 5px !important
-}
-
-.card .card-block p {
-    line-height: 25px
-}
-
-.m-b-10 {
-    margin-bottom: 10px
-}
-
 .text-muted {
-    color: #919aa3 !important
+    color: #98a6ad!important;
 }
-
-.b-b-default {
-    border-bottom: 1px solid #e0e0e0
+h4 {
+    line-height: 22px;
+    font-size: 18px;
 }
-
-.f-w-600 {
-    font-weight: 600
-}
-
-.m-b-20 {
-    margin-bottom: 20px
-}
-
-.m-t-40 {
-    margin-top: 20px
-}
-
-.p-b-5 {
-    padding-bottom: 5px !important
-}
-
-.m-b-10 {
-    margin-bottom: 10px
-}
-
-.m-t-40 {
-    margin-top: 20px
-}
-
-.user-card-full .social-link li {
-    display: inline-block
-}
-
-.user-card-full .social-link li a {
-    font-size: 20px;
-    margin: 0 10px 0 0;
-    -webkit-transition: all 0.3s ease-in-out;
-    transition: all 0.3s ease-in-out
-}
-  /* End Profile Cards */
-  /* Responsive */
-  /* // Small devices (landscape phones, 576px and up) */
-  @media (max-width: 576px) 
-  {
-    .page-content{
-        width: 100%;
-        margin: 0px;
-        padding: 0px;    
-    }
-    .card-block
-    {
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-    } 
-    .padding 
-    {
-        width: 100%;
-        margin: 0px;
-        padding: 0px;
-    }
-}
-  /* End responsive */
