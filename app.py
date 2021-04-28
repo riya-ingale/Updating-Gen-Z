@@ -13,6 +13,8 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import requests
 from pygooglenews import GoogleNews
+from base64 import b64encode, b64decode
+import base64
 
 
 app = Flask(__name__)
@@ -31,7 +33,7 @@ db = SQLAlchemy(app)
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    profile = db.Column(db.LargeBinary, nullable=True)
+    profile = db.Column(db.String, nullable=True)
     name = db.Column(db.String(200))
     about = db.Column(db.String(500), nullable=True)
     username = db.Column(db.String(200), unique=True)
@@ -72,7 +74,7 @@ class Blog(db.Model):
     title = db.Column(db.String(200))
     topic = db.Column(db.String(200))
     post = db.Column(db.String(1500))
-    picture = db.Column(db.LargeBinary, nullable=True)
+    picture = db.Column(db.String, nullable=True)
     likes = db.Column(db.Integer, default=0)
     date = db.Column(db.String(50))
 
@@ -104,6 +106,11 @@ def signup():
         cpassword = request.form['cpassword']
         mail_id = request.form['mail_id']
 
+        with open("Static/img/default_pf.png", "rb") as f:
+            data = f.read()
+            picture = b64encode(data).decode("utf-8")
+            print("default pic added")
+
         user = Users.query.filter_by(username=username).first()
         if user:
             flash("User Name Already Exists, Choose another one")
@@ -115,7 +122,7 @@ def signup():
 
         if(password == cpassword):
             new_user = Users(username=username, name=name,
-                             password=hashed_password, mail_id=mail_id)
+                             password=hashed_password, mail_id=mail_id, profile=picture)
             db.session.add(new_user)
             db.session.commit()
 
@@ -190,6 +197,7 @@ def news():
                 'published': item.published
             }
             stories.append(story)
+        return render_template('news.html', stories=stories, current_user=current_user)    
     if request.method == "POST":
         query = request.form.get('query')
         stories = []
@@ -203,7 +211,7 @@ def news():
                 'published': item.published
             }
             stories.append(story)
-    return render_template('news.html', stories=stories, current_user=current_user)
+        return render_template('news.html', stories=stories, current_user=current_user, query = query)
 
 
 @app.route('/addblog/<int:user_id>', methods=['POST', 'GET'])
@@ -216,14 +224,24 @@ def addblog(user_id):
         date = date.strftime("%d %B, %Y")
         post = request.form['post']
 
+        picture = request.files['picture']
+        if picture.filename == "":
+            with open("Static/img/default_blogpicture.jpeg", "rb") as f:
+                data = f.read()
+                picture = b64encode(data).decode("utf-8")
+                print("default pic added")
+        else:
+            picture = b64encode(picture.read()).decode("utf-8")
+
         new_blog = Blog(user_id=user_id, title=title,
-                        topic=domain, post=post, date=date)
+                        topic=domain, post=post, date=date, picture=picture)
         db.session.add(new_blog)
         db.session.commit()
         user = Users.query.filter_by(id=user_id).first()
         if user.blogsnumber == None:
             user.blogsnumber = 1
-        user.blogsnumber = user.blogsnumber + 1
+        else:
+            user.blogsnumber = user.blogsnumber + 1
         db.session.commit()
         return redirect('/allblogs')
 
@@ -237,7 +255,7 @@ def allblogs():
         for blog in blogs:
             user = Users.query.filter_by(id=blog.user_id).first()
             blog.user_id = user.username
-    return render_template('blogs.html', blogs=blogs)
+    return render_template('blogs.html', blogs=blogs, current_user = current_user)
 
 
 @app.route('/searchblogs', methods=['POST', 'GET'])

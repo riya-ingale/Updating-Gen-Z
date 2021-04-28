@@ -26,13 +26,16 @@
 	            <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr auto">
 	                <li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-	                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="/search"><i class="fa fa-sign-out"></i> </span>Search</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/search"><i class="fa fa-sign-out"></i> </span>Search</a></li>
                     <li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
-					          <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+                    {% endif %}
 	                </ul>
+
 	            </div>
 	            <div>
 	             <h1 style="color: white;"> Updating Gen-Z</h1>
@@ -45,7 +48,7 @@
     <div class="contact-image">
         <img src="../static/img/logo.png" alt="rocket_contact"/>
     </div>
-    <form method="POST">
+    <form method="POST"  enctype="multipart/form-data">
         <h3>Add Your Blog</h3>
        <div class="row">
             <div class="col-md-6">
@@ -60,7 +63,7 @@
                 </div>
                 <div class="form-group">
                     <label for="myfile">Image for Blog:</label>
-                    <input type="file" id="myfile" name="myfile">
+                    <input type="file" id="myfile" name="picture">
                 </div>
                 <div class="form-group">
                     <input type="submit" formaction="/addblog/{{current_user.id}}" name="addblog" class="btnContact" value="Add Blog" />

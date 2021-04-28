@@ -22,22 +22,30 @@
 	            <div class="collapse navbar-collapse" id="Navbar">
 					<ul class="navbar-nav mr auto">
 						<li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-						  <li class="nav-i
-						  tem"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
 
-						{% if current_user.get_authenticated %}
-						  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+						{%if not current_user.is_authenticated %}
+						<li class="nav-item"><a class="nav-link" href="/login"><i class="fa fa-sign-out"></i> </span>Login</a></li>
+						{% endif %}
+
+						<li class="nav-i
+						tem"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+
+						{% if current_user.is_authenticated %}
+						  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
 						{% endif %}
 
 						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
 
-						{%if current_user.get_authenticated %}
-						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-sign-out"></i> </span>Search</a></li>
+						{%if current_user.is_authenticated %}
+						  <li class="nav-item"><a class="nav-link" href="/searchusers"><i class="fa fa-sign-out"></i> </span>Search</a></li>
 						{% endif %}
 
 						<li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
 						<li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
+
+						{%if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+						{% endif %}
 						</ul>
 	            </div>
 	            <div>
@@ -82,7 +90,7 @@
 		{% for blog in blogs %}
 		<article class="postcard blue">
 			<a class="postcard__img_link" href="#">
-				<img class="postcard__img" src="https://picsum.photos/1000/1000" alt="Image Title" />
+				<img class="postcard__img" src="data:;base64,{{ blog.picture }}" alt="Image Title" />
 			</a>
 			<div class="postcard__text">
 				<h1 class="postcard__title blue"><a href="#">{{blog.title }}</a></h1>
@@ -102,47 +110,8 @@
 		</article>
 		{% endfor %}
 
-		<article class="postcard red">
-			<a class="postcard__img_link" href="#">
-				<img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />	
-			</a>
-			<div class="postcard__text">
-				<h1 class="postcard__title red"><a href="#">Blog Title</a></h1>
-				<div class="postcard__subtitle small">
-					<time datetime="2020-05-25 12:00:00">
-						<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-					</time>
-				</div>
-				<div class="postcard__bar"></div>
-				<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-				<ul class="postcard__tagbox">
-					<li class="tag__item">Domain</li>
-					<li class="tag__item">User Name</li>
-					<li class="tag__item play blue"><a href="#">Score</a></li>
-				</ul>
-			</div>
-		</article>
 
-		<article class="postcard green">
-			<a class="postcard__img_link" href="#">
-				<img class="postcard__img" src="https://picsum.photos/500/501" alt="Image Title" />
-			</a>
-			<div class="postcard__text">
-				<h1 class="postcard__title green"><a href="#">Blog Title</a></h1>
-				<div class="postcard__subtitle small">
-					<time datetime="2020-05-25 12:00:00">
-						<i class="fas fa-calendar-alt mr-2"></i>Mon, May 25th 2020
-					</time>
-				</div>
-				<div class="postcard__bar"></div>
-				<div class="postcard__preview-txt">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi, fugiat asperiores inventore beatae accusamus odit minima enim, commodi quia, doloribus eius! Ducimus nemo accusantium maiores velit corrupti tempora reiciendis molestiae repellat vero. Eveniet ipsam adipisci illo iusto quibusdam, sunt neque nulla unde ipsum dolores nobis enim quidem excepturi, illum quos!</div>
-				<ul class="postcard__tagbox">
-					<li class="tag__item">Domain</li>
-					<li class="tag__item">User Name</li>
-					<li class="tag__item play blue"><a href="#">Score</a></li>
-				</ul>
-			</div>
-		</article>
+		
 		<article class="postcard yellow">
 			<a class="postcard__img_link" href="#">
 				<img class="postcard__img" src="https://picsum.photos/501/501" alt="Image Title" />

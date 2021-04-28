@@ -23,11 +23,15 @@
 	               <ul class="navbar-nav mr auto">
 	                <li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
 	                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+                    {% if current_user.is_authenticated %}
+	                  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+                    {% endif %}
 	                  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="search.html"><i class="fa fa-sign-out"></i> </span>Search</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="/searchusers"><i class="fa fa-sign-out"></i> </span>Search</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
+                    {%if current_user.is_authenticated %}
 					          <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+                    {% endif %}
 	                </ul>
 	            </div>
 	            <div>
@@ -47,7 +51,7 @@
 <p>
 	<div class="row justify-content-center">
     <div class="col-12 col-md-10 col-lg-8">
-      <h1 style="color: #000;text-align: center;">News</h1><br>
+      <h1 style="color: #000;text-align: center;">Latest News</h1><br>
         <form class="card card-sm" style="background-color: #585C61;" method="POST">
             <div class="card-body row no-gutters align-items-center">
               
@@ -73,7 +77,7 @@
 {% for story in stories %}
 <div class="blog-card col-6">
     <div class="header">
-      <h2 class="category">News</h2>
+      <h2 class="category">{{ query }}</h2>
     </div>
   
     <div class="content">          

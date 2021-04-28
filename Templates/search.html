@@ -21,22 +21,27 @@
 	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="41"></a>
 	            <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr auto">
-	                <li class="nav-item"><a class="nav-link" href="index.html"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-	                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
-	                  <li class="nav-item"><a class="nav-link" href=""><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
+                    <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+                    {% endif %}
+
+	                <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
                     <li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
-					          <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
-	                </ul>
+                    <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+	            </ul>
 	            </div>
+
 	            <div>
-	             <h1 style="color: white;"> Updating Gen-Z</h1>
+	                <h1 style="color: white;"> Updating Gen-Z</h1>
 	            </div>
 	        </div>
 	    </nav> 
 	</header>
-
+    <p><br></p>
     <div class="row justify-content-center"> 
         <div class="col-12 col-md-10 col-lg-8">
           <h1 style="color: #000;text-align: center;">Search with UserName</h1><br>
@@ -72,7 +77,7 @@
                 <div class="col-lg-4">
                     <div class="text-center card-box">
                         <div class="member-card pt-2 pb-2">
-                            <div class="thumb-lg member-thumb mx-auto"><img src="https://bootdey.com/img/Content/avatar/avatar2.png" class="rounded-circle img-thumbnail" alt="profile-image"></div>
+                            <div class="thumb-lg member-thumb mx-auto"><img src="data:;base64,{{ user.profile }}" class="rounded-circle img-thumbnail" alt="profile-image"></div>
                             <div class="">
                                 <h3>{{user.username}}</h3>
                                 <h4>{{ user.name }}</h4>
