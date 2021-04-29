@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>User Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../static/Css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+ <!--  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"> -->
+</head>
+<body>
+	<header>
+	    <nav class="navbar navbar-dark navbar-expand-sm fixed-top" style="background: #022140;font-size: 1em;">
+	        <div class="container">
+	                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+	                  <span class="navbar-toggler-icon"></span>  
+	                </button>
+	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="41"></a>
+              <a class="navbar-brand mr-auto" href="#"><img src="../static/img/default_pf.png" height="50" width="41"></a>
+	            <div class="collapse navbar-collapse" id="Navbar">
+	               <ul class="navbar-nav mr auto">
+	                <li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
+	                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+	                  <li class="nav-item"><a class="nav-link" href="/searchusers"><i class="fa fa-sign-out"></i> </span>Search</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
+                    <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user"></i> </span>Profile </a></li>
+					          <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+	                </ul>
+	            </div>
+	            <div>
+	             <h1 style="color: white;">Updating Gen Z</h1>
+	            </div>
+	        </div>
+	    </nav> 
+	</header>
+    <p style="margin-top: 100px;color: #fff;"><h1 style="color: #fff;">General Info</h1></p>
+    <form class='login-form' method="POST" style="font-size: 1.5em;">
+        <div class="flex-row">
+        <label class="lf--label" for="Name">
+          <svg x="0px" y="0px" width="12px" height="13px">
+            <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+          </svg>
+        </label>
+        <input id="Full Name" name = "name" class='lf--input' placeholder='Name' type='text'>
+      </div>
+      <div class="flex-row">
+        <label class="lf--label" for="mail">
+          <svg x="0px" y="0px" width="12px" height="13px">
+            <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+          </svg>
+        </label>
+        <input id="mail" name = "mail_id" class='lf--input' placeholder='mail' type='text'>
+      </div>
+      <div class="flex-row">
+        <label class="lf--label" for="username">
+          <svg x="0px" y="0px" width="12px" height="13px">
+            <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+          </svg>
+        </label>
+        <input id="username" name= "username" class='lf--input' placeholder='Username' type='text'>
+      </div>
+      <div class="flex-row">
+        <label class="lf--label" for="expertise">
+            <svg x="0px" y="0px" width="12px" height="13px">
+                <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+              </svg>
+        </label>
+        <input id="expertise" name ="expertise" class='lf--input' placeholder='expertise' type='text'>
+      </div>
+      <div class="flex-row">
+        <label class="lf--label" for="MobileNo.">
+            <svg x="0px" y="0px" width="12px" height="13px">
+                <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+              </svg>
+        </label>
+        <input id="MobileNo." name="MobileNo." class='lf--input' placeholder='MobileNo.' type='text'>
+      </div>
+      <div class="flex-row">
+        <label class="lf--label" for="Profile_pic">
+          <svg x="0px" y="0px" width="12px" height="13px">
+            <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+          </svg>
+        </label>
+        <h6 style="color: #fff;margin-top: 18px;margin-left: 2px;">Profile_pic</h6>
+        <input id="Profile_pic" name= "Profile_pic" class='lf--input' placeholder='Profile_pic' type='file'>
+      </div>
+      <input class='lf--submit' type='submit' formaction="/signup" value='Update'>
+    </form>
+    <p><h1 style="color: #fff;">Blogs Written By User</h1></p>
+    <div class="container row">
+        <div class="container">
+            <div class="h1 text-center" id="pageHeaderTitle"></div>
+            <article class="postcard blue">
+                <a class="postcard__img_link" href="#">
+                    <img class="postcard__img" src="data:;base64,{{ blog.picture }}" alt="Image Title" />
+                </a>
+                <div class="postcard__text">
+                    <h1 class="postcard__title blue"><a href="#">{{blog.title }}</a></h1>
+                    <div class="postcard__subtitle small">
+                        <time datetime="2020-05-25 12:00:00">
+                            <i class="fas fa-calendar-alt mr-2"></i>{{blog.date}}
+                        </time>
+                    </div>
+                    <div class="postcard__bar"></div>
+                    <div class="postcard__preview-txt">{{blog.post}}</div>
+                    <ul class="postcard__tagbox">
+                        <li class="tag__item">{{ blog.topic }}</li>
+                        <li class="tag__item">{{ blog.user_id }}</li>
+                        <li class="tag__item play blue"><a href="#">Score -  {{ blog.likes }}</a></li>
+                    </ul>
+                </div>
+            </article>  
+
+        </div>
+    </div>
+    <p><h1 style="color: #fff;">Score Card</h1></p>
+    <!-- ScoreCard -->
+    <div class="container"  style="margin-bottom: 100px;">
+      <div class="row">
+          <div class="col-12">
+              <div class="card">
+                  <div class="card-body text-center">
+                      <h5 class="card-title m-b-0">Your Score Card</h5>
+                  </div>
+                  <div class="table-responsive">
+                      <table class="table">
+                          <thead class="thead-light">
+                              <tr>
+                                  <th> Number Of Quizzes </th>
+                                  <th scope="col">Grammar</th>
+                                  <th scope="col">History</th>
+                                  <th scope="col">Geography</th>
+                                  <th scope="col">Human Resource</th>
+                                  <th scope="col">Law</th>
+                                  <th scope="col">Pschycology</th>
+                                  <th scope="col">Economy</th>
+                                  <th scope="col">Agriculture</th>
+                                  <th scope="col">Science</th>
+                                  <th scope="col">Sociology</th>
+                                  <th scope="col">Politics</th>
+                              </tr>
+                          </thead>
+                          <tbody class="customtable">
+                              <tr>
+                                  <td>UK</td>
+                                  <td>Safari</td>
+                                  <td>Mac OS</td>
+                                  <td>16</td>
+                                  <td>UAE</td>
+                                  <td>Google Chrome</td>
+                                  <td>Win 2013</td>
+                                  <td>76.12</td>
+                                  <td>Canada</td>
+                                  <td>Internet Explorer</td>
+                                  <td>Win 2010</td>
+                                  <td>10</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+</html>
