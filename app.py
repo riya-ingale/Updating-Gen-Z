@@ -197,7 +197,7 @@ def news():
                 'published': item.published
             }
             stories.append(story)
-        return render_template('news.html', stories=stories, current_user=current_user)    
+        return render_template('news.html', stories=stories, current_user=current_user)
     if request.method == "POST":
         query = request.form.get('query')
         stories = []
@@ -211,7 +211,7 @@ def news():
                 'published': item.published
             }
             stories.append(story)
-        return render_template('news.html', stories=stories, current_user=current_user, query = query)
+        return render_template('news.html', stories=stories, current_user=current_user, query=query)
 
 
 @app.route('/addblog/<int:user_id>', methods=['POST', 'GET'])
@@ -255,7 +255,7 @@ def allblogs():
         for blog in blogs:
             user = Users.query.filter_by(id=blog.user_id).first()
             blog.user_id = user.username
-    return render_template('blogs.html', blogs=blogs, current_user = current_user)
+    return render_template('blogs.html', blogs=blogs, current_user=current_user)
 
 
 @app.route('/searchblogs', methods=['POST', 'GET'])
@@ -291,6 +291,46 @@ def searchusers():
     else:
         users = Users.query.all()
     return render_template('search.html', current_user=current_user, users=users)
+
+
+@app.route('/addques', methods=['POST', 'GET'])
+def addques():
+    if request.method == "POST":
+        question = request.form['question']
+        domain = request.form['domain']
+        choice1 = request.form['choice1']
+        choice2 = request.form['choice2']
+        choice3 = request.form['choice3']
+        choice4 = request.form['choice4']
+        answer = request.form['answer']
+        newques = Questions(question=question, domain=domain, choice1=choice1,
+                            choice2=choice2, choice3=choice3, choice4=choice4, answer=answer)
+        db.session.add(newques)
+        db.session.commit()
+        flash('Question added!')
+        return redirect('/addques')
+    return render_template('admin.html', current_user=current_user)
+
+
+@app.route('/submitquiz', methods=['POST', 'GET'])
+def submitquiz():
+    question_list = Questions.query.all()
+    if request.method == "GET":
+        return render_template('quiz.html', question_list=question_list)
+    else:
+        count = 0
+        for question in question_list:
+            print("Inside for loop")
+            question.id = str(question.id)
+            selected_option = request.form.get(question.id)
+            print("selected_option - ", selected_option)
+            correct_option = question.answer
+            print("correct_option - ", correct_option)
+            if selected_option == correct_option:
+                count = count+1
+                print("count++")
+        count = str(count)
+        return count
 
 
 if __name__ == "__main__":

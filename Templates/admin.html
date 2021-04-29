@@ -24,7 +24,7 @@
 	                </button>
 	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="41"></a>
 	            <div class="collapse navbar-collapse" id="Navbar">
-                <h3 style="color: white;">Admin Page</h3>
+                <h3 style="color: white;">Admin Page - Add Question</h3>
 
 	            </div>
 	            <div>
@@ -34,51 +34,51 @@
 	    </nav> 
 	</header>
     <div class="container" style="margin-top: 80px;">
-        <form>
+        <form method="POST">
             <div class="field" tabindex="1">
                 <label for="question">
                     <i class="fa fa-question-circle"></i>Your Question
                 </label>
-                <input name="username" type="text" placeholder="e.g. What is" required>
+                <input name="question" type="text" placeholder="e.g. What is" required>
             </div>
             <div class="field" tabindex="2">
                 <label for="Subject">
                     <i class="fa fa-edit"></i>Subject
                 </label>
-                <input name="Correct-Answer" type="text" placeholder="" required>
+                <input name="domain" type="text" placeholder="" required>
             </div>
             <div class="field" tabindex="3">
                 <label for="opt1">
                     <i class="fa fa-edit"></i>Option 1
                 </label>
-                <input name="opt1" type="text" required>
+                <input name="choice1" type="text" required>
             </div>
             <div class="field" tabindex="4">
                 <label for="opt2">
                     <i class="fa fa-edit"></i>Option 2
                  </label>
-                <input name="opt2" type="text" required>
+                <input name="choice2" type="text" required>
             </div>
             <div class="field" tabindex="5">
                 <label for="opt3">
                     <i class="fa fa-edit"></i>Option 3
                 </label>
-                <input name="opt3" type="text" required>
+                <input name="choice3" type="text" required>
             </div>
             <div class="field" tabindex="6">
                 <label for="opt4">
                     <i class="fa fa-edit"></i>Option 4
                 </label>
-                <input name="opt4" type="text" required>
+                <input name="choice4" type="text" required>
             </div>
             <div class="field" tabindex="7">
                 <label for="Correct-Answer">
                     <i class="fa fa-edit"></i>Correct Answer
                 </label>
-                <input name="Correct-Answer" type="text" placeholder="" required>
+                <input name="answer" type="text" placeholder="" required>
             </div>
             
-            <button type="reset">Send Me Message</button>
+            <button formaction="/addques" type="submit">Add</button>
         </form>
     </div>
     

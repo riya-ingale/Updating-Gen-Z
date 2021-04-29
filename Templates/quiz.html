@@ -56,350 +56,51 @@
                             <h4>MCQ Quiz</h4><span></span>
                         </div>
                     </div>
+                    <form method="POST">
+                    {% for question in question_list %}
                     <div class="question bg-white p-3 border-bottom">
                         <div class="d-flex flex-row align-items-center question-title">
                             <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
+                            <h5 class="mt-1 ml-2">{{question.question}}</h5>
                         </div>
                         <div class="ans ml-2">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
+                                  <input type="radio" class="form-check-input"  value ="{{question.choice1}}" name="{{question.id}}">{{question.choice1}}
                                 </label>
                               </div>
                         </div>
                         <div class="ans ml-2">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 2
+                                  <input type="radio" class="form-check-input" value ="{{question.choice2}}" name="{{question.id}}">{{question.choice2}}
                                 </label>
                               </div>
                         </div>
                         <div class="ans ml-2">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input"  name="optradio1">Option 3
+                                  <input type="radio" class="form-check-input"  value ="{{question.choice3}}"  name="{{question.id}}">{{question.choice3}}
                                 </label>
                               </div>
                         </div>
                         <div class="ans ml-2">
                             <div class="form-check">
                                 <label class="form-check-label">
-                                  <input type="radio" class="form-check-input"  name="optradio1">Option 4
+                                  <input type="radio" class="form-check-input"  value ="{{question.choice4}}" name="{{question.id}}">{{question.choice4}}
                                 </label>
                               </div>
                         </div>
                     </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input"  name="optradio2" id="5" >Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input"   name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input"   name="optradio2">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <var>                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div>
-                    <div class="question bg-white p-3 border-bottom">
-                        <div class="d-flex flex-row align-items-center question-title">
-                            <h3 class="text-danger">Q.</h3>
-                            <h5 class="mt-1 ml-2">Which of the following country has largest population?</h5>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio1">Option 1
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio2">Option 2
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio3">Option 3
-                                </label>
-                              </div>
-                        </div>
-                        <div class="ans ml-2">
-                            <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="optradio4">Option 4
-                                </label>
-                              </div>
-                        </div>
-                    </div></var>
+                    {% endfor %}
+                    <p><br></p>
+                    <input type="submit" formaction="/submitquiz" value="SUBMIT"/>
+                  </form>
                 </div>
             </div>
         </div>
     </div>
+    <p><br></p>
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
