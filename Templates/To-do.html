@@ -25,7 +25,7 @@
 	                <li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
 	                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
 	                  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
-	                  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+	              
 	                  <li class="nav-item"><a class="nav-link" href="/searchusers"><i class="fa fa-sign-out"></i> </span>Search</a></li>
                     <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-question"></i> </span>Quiz </a></li>
 					          <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user"></i> </span>Profile </a></li>
@@ -44,9 +44,10 @@
         class="app-container d-flex align-items-center justify-content-center flex-column"
         ng-app="myApp"
         ng-controller="myController" style="margin-top: 100px;"      >
-        {{ task_name }}
-        <h3>Todo App</h3>
+        {{current_user.name}}
+        <h3>Todo List</h3>
         <div class="d-flex align-items-center mb-3">
+          <form method="POST">
           <div class="form-group mr-3 mb-0">
             <input
               ng-model="yourTask"
@@ -54,25 +55,29 @@
               class="form-control"
               id="formGroupExampleInput"
               placeholder="Enter a task here"
+              name = 'task'
             />
           <br>
-          <input type="datetime-local" id="birthdaytime" name="birthdaytime">
+          <input type="date" id="birthdaytime" name="date">
           <br>
           
           <button
-            type="button"
+            type="submit"
+            formaction="/todolist/{{current_user.id}}"
             class="btn btn-primary mr-3"
             ng-click="saveTask()"
-            style="margin: 5px;"
-          >
-            Save
+            style="margin: 5px;">
+          Save
           </button>
-          <button type="button" class="btn btn-warning" ng-click="getTask()">
-            Show All Tasks
+
+          <button type="submit" formaction="/showtodolist/{{current_user.id}}" class="btn btn-warning" ng-click="getTask()">
+          Show All Tasks
           </button>
         </div>
+      </form>
         </div>
-        {{ username }}
+        {% if show == 1 %}
+        ALL TASKS
         <div class="table-responsive">
           <table class="table table-hover table-bordered">
             <thead>
@@ -85,19 +90,22 @@
               </tr>
             </thead>
             <tbody>
+              {% for task in tasklist  %}
               <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>{{ task.task_name }}</td>
-                <td>{{DateTime}}</td>
-                <td>{{ task.status ? "Completed" : "In progress" }}</td>
+                <td>{{task.id}}</td>
+                <td>{{task.task }}</td>
+                <td>{{task.date }}</td>
+                <td>{{ task.status }}</td>
                 <td><button class="btn btn-danger"">Delete</button>
                   <button class="btn btn-info">Update</button>
                   <button class="btn btn-success">Finished</button>
                 </td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
+        {% endif %}
       </div>
     </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

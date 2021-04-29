@@ -35,7 +35,9 @@
 						  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
 						{% endif %}
 
-						  <li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+						{% if current_user.is_authenticated %}
+						  <li class="nav-item"><a class="nav-link" href="/todolist/{{current_user.id}}"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+						{% endif %}
 
 						{%if current_user.is_authenticated %}
 						  <li class="nav-item"><a class="nav-link" href="/searchusers"><i class="fa fa-sign-out"></i> </span>Search</a></li>
@@ -44,10 +46,15 @@
 						<li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
 						
 						<li class="nav-item"><a class="nav-link" href="/submitquiz"><i class="fa fa-question"></i> </span>Quiz </a></li>
+
+						{% if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="#"><i class="fa fa-user"></i> </span>Profile </a></li>
+						{% endif %}
+
 						{%if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
 						{% endif %}
+
 						</ul>
 	            </div>
 	            <div>

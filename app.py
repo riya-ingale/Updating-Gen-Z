@@ -38,8 +38,8 @@ class Users(UserMixin, db.Model):
     about = db.Column(db.String(500), nullable=True)
     username = db.Column(db.String(200), unique=True)
     password = db.Column(db.String(200))
-    mail_id = db.Column(db.String(200), unique=True)
-    mobno = db.Column(db.String(200))
+    mail_id = db.Column(db.String(100), unique=True)
+    mobno = db.Column(db.String(20))
     blogsnumber = db.Column(db.Integer)
     expertise = db.Column(db.String(200), nullable=True)
 
@@ -71,8 +71,8 @@ class Questions(db.Model):
 class Blog(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
-    title = db.Column(db.String(200))
-    topic = db.Column(db.String(200))
+    title = db.Column(db.String(100))
+    topic = db.Column(db.String(100))
     post = db.Column(db.String(1500))
     picture = db.Column(db.String, nullable=True)
     likes = db.Column(db.Integer, default=0)
@@ -83,8 +83,8 @@ class Tasks(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
     task = db.Column(db.String(200))
-    date = db.Column(db.Date)
-    time = db.Column(db.Time)
+    status = db.Column(db.String(10), default="In progress")
+    date = db.Column(db.String, nullable=True)
 
 
 @login_manager.user_loader
@@ -331,6 +331,25 @@ def submitquiz():
                 print("count++")
         count = str(count)
         return count
+
+
+@app.route('/todolist/<int:user_id>', methods=['POST', 'GET'])
+def todolist(user_id):
+    show = None
+    if request.method == "POST":
+        task = request.form.get('task')
+        deadline = request.form.get('date')
+        new_task = Tasks(user_id=user_id, task=task, date=deadline)
+        db.session.add(new_task)
+        db.session.commit()
+        flash('TASK ADDED')
+    return render_template('To-do.html', current_user=current_user, show=None)
+
+@app.route('/showtodolist/<int:user_id>', methods=['POST', 'GET'])
+def showtodolist(user_id):
+    user = Users.query.filter_by(id=user_id).first()
+    tasklist = Tasks.query.filter_by(user_id=user_id).all()
+    return render_template('To-do.html', tasklist=tasklist, current_user=current_user, show = 1)
 
 
 if __name__ == "__main__":
