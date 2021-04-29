@@ -96,9 +96,8 @@
                 <td>{{task.task }}</td>
                 <td>{{task.date }}</td>
                 <td>{{ task.status }}</td>
-                <td><button class="btn btn-danger"">Delete</button>
-                  <button class="btn btn-info">Update</button>
-                  <button class="btn btn-success">Finished</button>
+                <td><form method="POST"><button type="submit" formaction="/deletetask/{{current_user.id}}/{{task.id}}" class="btn btn-danger"">Delete</button>
+                  <button type="submit" formaction="/finishtask/{{current_user.id}}/{{task.id}}"  class="btn btn-success">Finished</button></form>
                 </td>
               </tr>
               {% endfor %}

@@ -60,7 +60,24 @@
                     </div>
                     <!--end of col-->
                     <div class="col">
-                        <input class="form-control form-control-lg form-control-borderless" name="query" type="search" placeholder="Subject" style="background-color: #B1A296;">
+                        <div class="dropdown show">
+                            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Subjects
+                            </a>
+                          
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/grammer">Grammar</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/history">History</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/geography">Geography</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/humanresource">Human Resource</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/law">Law</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/psychology">Psychology</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/economy">Economy</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/agriculture">Agriculture</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/science">Science</a>
+                              <a class="dropdown-item" href="/submitquiz/{{current_user.id}}/politics">Politics</a>
+                            </div>
+                          </div>
                     </div>
                     <!--end of col-->
                     <div class="col-auto">
@@ -72,6 +89,7 @@
         </div>
         <!--end of col-->
     </div>
+    {% if q %}
     <div class="container mt-5" style="margin-top: 500px;">
         <div class="d-flex justify-content-center row">
             <div class="col-md-10 col-lg-10">
@@ -119,12 +137,13 @@
                     </div>
                     {% endfor %}
                     <p><br></p>
-                    <input type="submit" formaction="/submitquiz" value="SUBMIT"/>
+                    <input type="submit" formaction="/submitquiz/{{current_user.id}}/{{domain}}" value="SUBMIT"/>
                   </form>
                 </div>
             </div>
         </div>
     </div>
+    {% endif %}
     <p><br></p>
 </body>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

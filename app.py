@@ -54,6 +54,7 @@ class Users(UserMixin, db.Model):
     science_points = db.Column(db.Integer, nullable=True)
     sociology_points = db.Column(db.Integer, nullable=True)
     politics_points = db.Column(db.Integer, nullable=True)
+
     score = db.Column(db.Integer)
 
 
@@ -312,12 +313,20 @@ def addques():
     return render_template('admin.html', current_user=current_user)
 
 
-@app.route('/submitquiz', methods=['POST', 'GET'])
-def submitquiz():
-    question_list = Questions.query.all()
+@app.route('/submitquiz/<int:user_id>', methods=['POST', 'GET'])
+def submitquizget(user_id):
     if request.method == "GET":
-        return render_template('quiz.html', question_list=question_list)
-    else:
+        return render_template('quiz.html', q=None, current_user=current_user)
+
+
+@app.route('/submitquiz/<int:user_id>/<domain>', methods=['POST', 'GET'])
+def submitquiz(user_id, domain):
+    print(domain)
+    question_list = Questions.query.filter_by(domain=domain)
+    if request.method == "GET":
+        return render_template('quiz.html', q=1, question_list=question_list, current_user=current_user, domain=domain)
+
+    if request.method == "POST":
         count = 0
         for question in question_list:
             print("Inside for loop")
@@ -329,7 +338,77 @@ def submitquiz():
             if selected_option == correct_option:
                 count = count+1
                 print("count++")
+        user = Users.query.filter_by(id=user_id).first()
+
+        if domain == "politics":
+            if user.politics_points == None:
+                user.politics_points = 0
+            user.politics_points = user.politics_points + count
+            db.session.commit()
+
+        elif domain == "grammer":
+            if user.grammer_points == None:
+                user.grammer_points = 0
+            user.grammer_points = user.grammer_points + count
+            db.session.commit()
+
+        elif domain == "geography":
+            if user.geography_points == None:
+                user.geography_points = 0
+            user.geography_points = user.geography_points + count
+            db.session.commit()
+
+        elif domain == "history":
+            if user.history_points == None:
+                user.history_points = 0
+            user.history_points = user.history_points + count
+            db.session.commit()
+
+        elif domain == "psychology":
+            if user.psychology_points == None:
+                user.psychology_points = 0
+            user.psychology_points = user.psychology_points+count
+            db.session.commit()
+
+        elif domain == "agriculture":
+            if user.agriculture_points == None:
+                user.agriculture_points = 0
+            user.agriculture_points = user.agriculture_points+count
+            db.session.commit()
+
+        elif domain == "law":
+            if user.law_points == None:
+                user.law_points = 0
+            user.law_points = user.law_points + count
+            db.session.commit()
+
+        elif domain == "sociology":
+            if user.sociology_points == None:
+                user.sociology_points = 0
+            user.sociology_points = user.sociology_points+count
+            db.session.commit()
+
+        elif domain == "economy":
+            if user.economy_points == None:
+                user.economy_points = 0
+            user.economy_points = user.economy_points + count
+            db.session.commit()
+
+        elif domain == "humanresource":
+            if user.humanresource_points == None:
+                user.humanresource_points = 0
+            user.humanresource_points = user.humanresource_points + count
+            db.session.commit()
+
+        elif domain == "science":
+            if user.science_points == None:
+                user.science_points = 0
+            user.science_points = user.science_points + count
+            db.session.commit()
+        else:
+            pass
         count = str(count)
+
         return count
 
 
@@ -345,11 +424,30 @@ def todolist(user_id):
         flash('TASK ADDED')
     return render_template('To-do.html', current_user=current_user, show=None)
 
+
 @app.route('/showtodolist/<int:user_id>', methods=['POST', 'GET'])
 def showtodolist(user_id):
     user = Users.query.filter_by(id=user_id).first()
     tasklist = Tasks.query.filter_by(user_id=user_id).all()
-    return render_template('To-do.html', tasklist=tasklist, current_user=current_user, show = 1)
+    return render_template('To-do.html', tasklist=tasklist, current_user=current_user, show=1)
+
+
+@app.route('/deletetask/<int:user_id>/<int:task_id>', methods=['POST'])
+def deletetask(user_id, task_id):
+    task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
+    db.session.delete(task)
+    db.session.commit()
+    tasklist = Tasks.query.filter_by(user_id=user_id).all()
+    return redirect(f'/showtodolist/{user_id}')
+
+
+@app.route('/finishtask/<int:user_id>/<int:task_id>', methods=['POST'])
+def finishtask(user_id, task_id):
+    task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
+    task.status = "Finished"
+    db.session.commit()
+    tasklist = Tasks.query.filter_by(user_id=user_id).all()
+    return redirect(f'/showtodolist/{user_id}')
 
 
 if __name__ == "__main__":
