@@ -93,10 +93,6 @@ def load_user(user_id):
     return Users.query.get(int(user_id))
 
 
-# EMAIL_ADDRESS = 'updatinggenz@gmail.com'
-# EMAIL_PASSWORD = 'updatinggenzpassword'
-
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == "POST":
@@ -126,19 +122,6 @@ def signup():
                              password=hashed_password, mail_id=mail_id, profile=picture)
             db.session.add(new_user)
             db.session.commit()
-
-            # msg = EmailMessage()
-            # msg['Subject'] = 'Sucessfully Registered to Updating Gen-z!'
-            # msg['From'] = EMAIL_ADDRESS
-            # msg['To'] = mail_id
-            # msg.set_content('Thank you for Registering to Updating Gen-z.')
-
-            # f = open("templates/hello.txt", "r")
-            # msg.add_alternative(f.read(), subtype='html')
-
-            # with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            #     smtp.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            #     smtp.send_message(msg)
 
             flash("Sucessfully Registered!", "success")
             return redirect('/login')
@@ -407,9 +390,13 @@ def submitquiz(user_id, domain):
             db.session.commit()
         else:
             pass
-        count = str(count)
 
-        return count
+        if user.score == None:
+            user.score = 0
+        user.score = user.score + count
+        db.session.commit()
+            
+        return redirect(f"/userprofile/{user.id}")
 
 
 @app.route('/todolist/<int:user_id>', methods=['POST', 'GET'])
@@ -449,6 +436,28 @@ def finishtask(user_id, task_id):
     tasklist = Tasks.query.filter_by(user_id=user_id).all()
     return redirect(f'/showtodolist/{user_id}')
 
+@app.route('/userprofile/<int:user_id>', methods = ['POST','GET'])
+def userprofile(user_id):
+    user = Users.query.filter_by(id = user_id).first()
+    blogs = Blog.query.filter_by(user_id = user_id).all()
+    if request.method == 'POST':
+        user.name = request.form['name']
+        user.username = request.form['username']
+        user.mail_id = request.form['mail_id']
+        user.mobno = request.form['mobno']
+        user.expertise = request.form['expertise']
+
+        picture = request.files['profile']
+        if picture.filename == "":
+            with open("Static/img/default_blogpicture.jpeg", "rb") as f:
+                data = f.read()
+                user.profile = b64encode(data).decode("utf-8")
+                print("default pic added")
+        else:
+            user.profile = b64encode(picture.read()).decode("utf-8")
+
+        db.session.commit()
+    return render_template('profile.html',user = user,current_user = current_user,blogs = blogs)
 
 if __name__ == "__main__":
     db.create_all()
