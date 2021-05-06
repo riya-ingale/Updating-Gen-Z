@@ -3,6 +3,10 @@ body {
     font-size: 0.5em;
 }
 
+li.nav-item{
+    font-size: medium !important;
+  }
+
 label.radio {
     cursor: pointer
 }

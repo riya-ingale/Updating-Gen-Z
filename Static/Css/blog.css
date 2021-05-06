@@ -2,13 +2,14 @@
 /* This pen */
 body {
   font-family: "Baloo 2", cursive;
-  font-size: 1.5em;
   color: #ffffff;
   text-rendering: optimizeLegibility;
-  background: #B1A296;
+  background: #FFF0F5;
   font-weight: initial;
 }
-
+li.nav-item{
+  font-size: medium !important;
+}
 a, a:hover {
   text-decoration: none;
   transition: color 0.3s ease-in-out;
@@ -29,7 +30,7 @@ a, a:hover {
 .postcard {
   flex-wrap: wrap;
   display: flex;
-  background-color: #1E4258;
+  background-color: #696969;
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 2rem 0;
@@ -65,7 +66,7 @@ a, a:hover {
   height: 10px;
   margin: 10px 0;
   border-radius: 5px;
-  background-color: #424242;
+  background-color: #ac3b61;
   transition: width 0.2s ease;
 }
 .postcard .postcard__text {

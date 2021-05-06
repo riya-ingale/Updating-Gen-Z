@@ -13,7 +13,7 @@
 </head>
 <body>
 	<header>
-	    <nav class="navbar navbar-dark navbar-expand-sm fixed-top" style="background: #022140;">
+	    <nav class="navbar navbar-dark navbar-expand-sm fixed-top" style="background: #2F4F4F;">
 	        <div class="container">
 	                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
 	                  <span class="navbar-toggler-icon"></span>  
@@ -30,8 +30,7 @@
 						<li class="nav-item"><a class="nav-link" href="/login"><i class="fa fa-sign-out"></i> </span>Login</a></li>
 						{% endif %}
 
-						<li class="nav-i
-						tem"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+						<li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
 
 						{% if current_user.is_authenticated %}
 						  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
@@ -60,7 +59,7 @@
 						</ul>
 	            </div>
 	            <div>
-	             <h1 style="color: white;font-size: 2em;"> Updating Gen-Z</h1>
+	             <h1 style="color: #fff;font-size: 1.5em;"> Updating Gen-Z</h1>
 	            </div>
 	        </div>
 	    </nav> 
@@ -70,22 +69,22 @@
 <p><br></p>
 <p><br></p>
 <p>
-	<div class="row justify-content-center" style="margin-top: 100px;">
+	<div class="row justify-content-center" style="margin-top: 50px;">
     <div class="col-12 col-md-10 col-lg-8">
       <h1 style="color: #000;text-align: center;">Blogs</h1><br>
-        <form class="card card-sm" style="background-color: #585C61;" method="POST">
+        <form class="card card-sm" style="background-color: #696969;" method="POST">
             <div class="card-body row no-gutters align-items-center">
               
                 <div class="col-auto">
-                    <i class="fa fa-search h4 text-body" style="color: #fff;"></i>
+                    <i class="fa fa-search h4 text-body" style="color: #edc7b7;"></i>
                 </div>
                 <!--end of col-->
                 <div class="col">
-                    <input name="query" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" style="background-color: #B1A296;"/>
+                    <input name="query" class="form-control form-control-lg form-control-borderless" type="search" placeholder="Search topics or keywords" style="background-color: #feffff;"/>
                 </div>
                 <!--end of col-->
                 <div class="col-auto">
-                    <button class="btn btn-lg" formaction="/searchblogs" type="submit" style="background-color: #1E4258;color: #fff;">Search</button>
+                    <button class="btn btn-lg" formaction="/searchblogs" type="submit" style="background-color: #45a29e;color: #fff;">Search</button>
                 </div>
                 <!--end of col-->
             </div>
