@@ -86,7 +86,7 @@ body {
   font-family: "Cookie", cursive;
   position: relative;
   transition: 1s;
-  -webkit-tap-highlight-color: transparent;
+  /* -webkit-tap-highlight-color: transparent; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -106,14 +106,7 @@ body {
   transition: 500ms;
 }
 
-.noselect {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
+
 
 #btn:hover {
   background: transparent;
