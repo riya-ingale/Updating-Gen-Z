@@ -15,6 +15,7 @@ import requests
 from pygooglenews import GoogleNews
 from base64 import b64encode, b64decode
 import base64
+import random
 
 
 app = Flask(__name__)
@@ -304,23 +305,29 @@ def submitquizget(user_id):
 
 @app.route('/submitquiz/<int:user_id>/<domain>', methods=['POST', 'GET'])
 def submitquiz(user_id, domain):
-    print(domain)
-    question_list = Questions.query.filter_by(domain=domain)
+    qlist = Questions.query.filter_by(domain=domain).all()
+    # random_question_list = random.sample(qlist, 5)
+    question_list = qlist
     if request.method == "GET":
         return render_template('quiz.html', q=1, question_list=question_list, current_user=current_user, domain=domain)
 
     if request.method == "POST":
         count = 0
+        selected_options = []
         for question in question_list:
-            print("Inside for loop")
+            print(question_list)
             question.id = str(question.id)
-            selected_option = request.form.get(question.id)
+
+            selected_option = request.form[question.id]
+            selected_options.append(selected_option)
+
             print("selected_option - ", selected_option)
             correct_option = question.answer
+
             print("correct_option - ", correct_option)
             if selected_option == correct_option:
                 count = count+1
-                print("count++")
+
         user = Users.query.filter_by(id=user_id).first()
 
         if domain == "politics":
@@ -393,10 +400,15 @@ def submitquiz(user_id, domain):
 
         if user.score == None:
             user.score = 0
+
+        current_quiz_score = count
+        max_score = len(question_list)
         user.score = user.score + count
         db.session.commit()
-            
-        return redirect(f"/userprofile/{user.id}")
+
+        print(selected_options)
+
+        return render_template("show-quiz-score.html", question_list=question_list, selected_options=selected_options, current_user=current_user, current_quiz_score = current_quiz_score)
 
 
 @app.route('/todolist/<int:user_id>', methods=['POST', 'GET'])
@@ -436,10 +448,11 @@ def finishtask(user_id, task_id):
     tasklist = Tasks.query.filter_by(user_id=user_id).all()
     return redirect(f'/showtodolist/{user_id}')
 
-@app.route('/userprofile/<int:user_id>', methods = ['POST','GET'])
+
+@app.route('/userprofile/<int:user_id>', methods=['POST', 'GET'])
 def userprofile(user_id):
-    user = Users.query.filter_by(id = user_id).first()
-    blogs = Blog.query.filter_by(user_id = user_id).all()
+    user = Users.query.filter_by(id=user_id).first()
+    blogs = Blog.query.filter_by(user_id=user_id).all()
     if request.method == 'POST':
         user.name = request.form['name']
         user.username = request.form['username']
@@ -457,7 +470,8 @@ def userprofile(user_id):
             user.profile = b64encode(picture.read()).decode("utf-8")
 
         db.session.commit()
-    return render_template('profile.html',user = user,current_user = current_user,blogs = blogs)
+    return render_template('profile.html', user=user, current_user=current_user, blogs=blogs)
+
 
 if __name__ == "__main__":
     db.create_all()

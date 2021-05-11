@@ -34,7 +34,7 @@
                     <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
 
                     {% if current_user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
                     {% endif %}
 
                     {% if current_user.is_authenticated %}
