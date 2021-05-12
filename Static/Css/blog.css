@@ -4,11 +4,12 @@ body {
   font-family: "Baloo 2", cursive;
   color: #ffffff;
   text-rendering: optimizeLegibility;
-  background: #FFF0F5;
+  background: #b2c5a2;
   font-weight: initial;
 }
 li.nav-item{
   font-size: medium !important;
+  color: #000000 !important;
 }
 a, a:hover {
   text-decoration: none;
@@ -30,7 +31,7 @@ a, a:hover {
 .postcard {
   flex-wrap: wrap;
   display: flex;
-  background-color: #696969;
+  background-color: #594d7a;
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 2rem 0;
@@ -298,7 +299,7 @@ a, a:hover {
 .container-fluid {
   overflow: hidden;
   margin-top: 250px;
-  background: #262626;
+  background: #022140;
   color: #627482 !important;
   margin-bottom: 0;
   padding-bottom: 0

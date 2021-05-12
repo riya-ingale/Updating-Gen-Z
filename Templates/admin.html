@@ -35,7 +35,7 @@
 	</header>
     <div class="container" style="margin-top: 80px;">
         <form method="POST">
-            <div class="field" tabindex="1">
+            <!-- <div class="field" tabindex="1">
                 <label for="question">
                     <i class="fa fa-question-circle"></i>Your Question
                 </label>
@@ -76,7 +76,20 @@
                     <i class="fa fa-edit"></i>Correct Answer
                 </label>
                 <input name="answer" type="text" placeholder="" required>
-            </div>
+            </div> -->
+            <h4 style="color: #fff;margin-left: 2px;font-size: 2em;">Excel File Of Questions</h4>
+            <h6>
+                Format for excel:<br>
+                First Row:Question<br>
+                Second Row:Option1<br>
+                Third Row:Option2<br>
+                Fourth Row:Option3<br>
+                Fifth Row:Option4<br>
+                Sixth Row:Correct Option<br>
+                Seventh Row:Domain<br>
+            </h6>
+            <input id="Excel" name= "Excel" class='lf--input' placeholder='Excel' type='file'>
+
             
             <button formaction="/addques" type="submit">Add</button>
         </form>

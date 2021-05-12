@@ -2,7 +2,7 @@
 
 body {
   margin-top: 20px;
-  background: #494b68;
+  background: #FEFFE8;
   height: 100 !important;
   font-family: "Rubik", sans-serif;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 .bg-overlay {
-  background-color: #000;
+  background-color: #481f72 !important;
   opacity: 0.7;
   position: absolute;
   top: 0;
@@ -76,7 +76,7 @@ body {
 }*/
 
 #btn {
-  background: #ffffff;
+  background: #baeca5;
   height: 50px;
   width: 150px;
   border: none;
@@ -325,7 +325,7 @@ body {
 .container-fluid {
   overflow: hidden;
   margin-top: 250px;
-  background: #262626;
+  background: #022140;
   color: #627482 !important;
   margin-bottom: 0;
   padding-bottom: 0;
