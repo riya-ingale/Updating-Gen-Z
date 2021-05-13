@@ -16,6 +16,7 @@ from pygooglenews import GoogleNews
 from base64 import b64encode, b64decode
 import base64
 import random
+from openpyxl import load_workbook
 
 
 app = Flask(__name__)
@@ -278,19 +279,62 @@ def searchusers():
     return render_template('search.html', current_user=current_user, users=users)
 
 
+def save_excel(form_excel):
+    _, f_ext = os.path.splitext(form_excel.filename)
+    excel_fn = "sheet" + f_ext
+    print(excel_fn)
+    excel_path = os.path.join(app.root_path, excel_fn)
+    print(excel_path)
+    form_excel.save(excel_path)
+    print("form_picture Saved")
+    return excel_fn
+
+
 @app.route('/addques', methods=['POST', 'GET'])
 def addques():
     if request.method == "POST":
-        question = request.form['question']
-        domain = request.form['domain']
-        choice1 = request.form['choice1']
-        choice2 = request.form['choice2']
-        choice3 = request.form['choice3']
-        choice4 = request.form['choice4']
-        answer = request.form['answer']
-        newques = Questions(question=question, domain=domain, choice1=choice1,
-                            choice2=choice2, choice3=choice3, choice4=choice4, answer=answer)
-        db.session.add(newques)
+        sheet = request.files['Excel']
+        data_file = save_excel(sheet)
+        # Load the entire workbook.
+        wb = load_workbook(data_file, data_only=True)
+        # Load one worksheet.
+        ws = wb['Sheet1']
+        all_rows = list(ws.rows)
+
+        # Pull information from specific cells.
+        for row in all_rows[1:10]:
+            question = row[0].value
+            choice1 = row[1].value
+            choice2 = row[2].value
+            choice3 = row[3].value
+            choice4 = row[4].value
+            answer = row[5].value
+            domain = row[6].value
+
+            print(f"Question:\n{question}")
+            print(f" {choice1}")
+            print(f" {choice2}")
+            print(f" {choice3}")
+            print(f" {choice4}")
+            print(f" {answer}\n")
+            print(f" {domain}\n")
+
+            newques = Questions(question=question, domain=domain, choice1=choice1,
+                                choice2=choice2, choice3=choice3, choice4=choice4, answer=answer)
+            db.session.add(newques)
+        #     cur.execute('insert into Quiz values(?,?,?,?,?,?,?)',
+        #             (Question,Choice1,Choice2,Choice3,Choice4,Answer,Domain))
+        # db.commit()
+        # db.close()
+
+        # question = request.form['question']
+        # domain = request.form['domain']
+        # choice1 = request.form['choice1']
+        # choice2 = request.form['choice2']
+        # choice3 = request.form['choice3']
+        # choice4 = request.form['choice4']
+        # answer = request.form['answer']
+
         db.session.commit()
         flash('Question added!')
         return redirect('/addques')
@@ -408,7 +452,7 @@ def submitquiz(user_id, domain):
 
         print(selected_options)
 
-        return render_template("show-quiz-score.html", question_list=question_list, selected_options=selected_options, current_user=current_user, current_quiz_score = current_quiz_score)
+        return render_template("show-quiz-score.html", question_list=question_list, selected_options=selected_options, current_user=current_user, current_quiz_score=current_quiz_score)
 
 
 @app.route('/todolist/<int:user_id>', methods=['POST', 'GET'])

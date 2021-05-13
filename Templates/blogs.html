@@ -36,19 +36,18 @@
 						  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
 						{% endif %}
 
-						{% if current_user.is_authenticated %}
-						  <li class="nav-item"><a class="nav-link" href="/todolist/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
-						{% endif %}
-
 						{%if current_user.is_authenticated %}
 						  <li class="nav-item"><a class="nav-link" href="/searchusers"  style="color: #696969;"><i class="fa fa-sign-out"></i> </span>Search</a></li>
 						{% endif %}
 
 						<li class="nav-item"><a class="nav-link" href="/news"  style="color: #696969;"><i class="fa fa-file"  style="color: #696969;"></i> </span>News </a></li>
 						
-						<li class="nav-item"><a class="nav-link" href="/submitquiz/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-question"></i> </span>Quiz </a></li>
+						{% if current_user.is_authenticated %}
+						<li class="nav-item"><a class="nav-link" href="/todolist/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+						{% endif %}
 
 						{% if current_user.is_authenticated %}
+						<li class="nav-item"><a class="nav-link" href="/submitquiz/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-question"></i> </span>Quiz </a></li>
 						<li class="nav-item"><a class="nav-link" href="/userprofile/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-user"></i> </span>My Profile</a></li>
 						{% endif %}
 
