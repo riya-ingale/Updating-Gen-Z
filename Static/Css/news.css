@@ -1,11 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c');
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 
 body {
+  font-family: "Baloo 2", cursive;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: #B1A296;
+  background: #b2c5a2 !important;
   font-size: 16px;
 }
 
@@ -19,7 +20,7 @@ body {
 }
 
 .header {
-  background-color: #1E4258;
+  background-color: #5a693d !important;
   color: #ffffff;
   text-align: center;
   border-top-left-radius: 10px;

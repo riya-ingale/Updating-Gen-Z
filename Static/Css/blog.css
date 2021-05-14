@@ -31,7 +31,7 @@ a, a:hover {
 .postcard {
   flex-wrap: wrap;
   display: flex;
-  background-color: #594d7a;
+  background-color: #5a693d;
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 2rem 0;

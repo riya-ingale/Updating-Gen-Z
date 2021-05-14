@@ -13,32 +13,32 @@
 </head>
 <body>
 	<header style="position: absolute;">
-	    <nav class="navbar navbar-dark navbar-expand-sm fixed-top" style="background: #022140;">
+	    <nav class="navbar navbar-dark navbar-expand-sm fixed-top" >
 	        <div class="container">
 	                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
 	                  <span class="navbar-toggler-icon"></span>  
 	                </button>
-	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="41"></a>
+	            <a class="navbar-brand mr-auto" href="#"><img src="../static/img/logo.png" height="50" width="50"></a>
                 {%if current_user.is_authenticated %}
-                <a class="navbar-brand mr-auto" href="#"><img src="data:;base64,{{ current_user.profile }}" height="50" width="41"></a>
+                <a class="navbar-brand mr-auto" href="#"><img src="data:;base64,{{ current_user.profile }}" height="50" width="50"></a>
                 {% endif %}
 	            <div class="collapse navbar-collapse" id="Navbar">
                 <ul class="navbar-nav mr auto">
-	                <li class="nav-item"><a class="nav-link" href="/"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
-                  <li class="nav-item"><a class="nav-link" href="/allblogs"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
+	                <li class="nav-item"><a class="nav-link" href="/"  style="color: #696969;"><span class="fa fa-home fa-lg"> </span>Home</a></li> 
+                  <li class="nav-item"><a class="nav-link" href="/allblogs"  style="color: #696969;"><i class="fa fa-info-circle"></i> </span>Blogs</a></li>
 
                   {% if current_user.is_authenticated %}
-                  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/addblog/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-address-card"></i> </span>Add Blog</a></li>
                   {% endif %}
 
-                  <li class="nav-item"><a class="nav-link" href="/searchusers"><i class="fa fa-sign-out"></i> </span>Search Users</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/searchusers"  style="color: #696969;"><i class="fa fa-sign-out"></i> </span>Search Users</a></li>
 
-                  <li class="nav-item"><a class="nav-link" href="/news"><i class="fa fa-file"></i> </span>News </a></li>
+                  <li class="nav-item"><a class="nav-link" href="/news"  style="color: #696969;"><i class="fa fa-file"></i> </span>News </a></li>
 
                   {%if current_user.is_authenticated %}
-                  <li class="nav-item"><a class="nav-link" href="/todolist/{{current_user.id}}"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
-                  <li class="nav-item"><a class="nav-link" href="/userprofile/{{current_user.id}}"><i class="fa fa-user"></i> </span>Profile </a></li>
-                  <li class="nav-item"><a class="nav-link" href="/logout"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
+                  <li class="nav-item"><a class="nav-link" href="/todolist/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-user-md"></i> </span>To-Do List</a></li>
+                  <li class="nav-item"><a class="nav-link" href="/userprofile/{{current_user.id}}"  style="color: #696969;"><i class="fa fa-user"></i> </span>Profile </a></li>
+                  <li class="nav-item"><a class="nav-link" href="/logout"  style="color: #696969;"><i class="fa fa-sign-out"></i> </span>Log Out </a></li>
                   {% endif %}
 	                </ul>
 	            </div>

@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 body {
     font-family: "Baloo 2", cursive;
     font-size: 16px;
     color: #ffffff;
     text-rendering: optimizeLegibility;
-    background: #B1A296;
+    background: #b2c5a2;
+    font-family: "Baloo 2", cursive;
     font-weight: initial;
   }
 

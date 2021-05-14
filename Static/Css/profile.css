@@ -1,4 +1,4 @@
-
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 * {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -11,9 +11,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-  
-    background: #B1A296;
-    font-family: "Roboto", helvetica, arial, sans-serif;
+    font-family: "Baloo 2", cursive;
+    background: #b2c5a2;
+    font-family: "Baloo 2", cursive;
     /* font-size: 1.5em; */
   }
   body:before {
@@ -23,7 +23,7 @@
     left: 0;
     height: 100%;
     width: 100%;
-    background-color: #B1A296;
+    background-color: #b2c5a2;
     opacity: 0.3;
   }
   h2{
@@ -120,10 +120,10 @@
   }
   /*End Form */
   /* Cards */
-.postcard {
+  .postcard {
     flex-wrap: wrap;
     display: flex;
-    background-color: #1E4258;
+    background-color: #5a693d;
     box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
     border-radius: 10px;
     margin: 0 0 2rem 0;
@@ -159,7 +159,7 @@
     height: 10px;
     margin: 10px 0;
     border-radius: 5px;
-    background-color: #424242;
+    background-color: #ac3b61;
     transition: width 0.2s ease;
   }
   .postcard .postcard__text {
@@ -262,7 +262,7 @@
     }
     .postcard .postcard__text:before {
       content: "";
-      position: relative;
+      position: absolute;
       display: block;
       background: #18151f;
       top: -20%;

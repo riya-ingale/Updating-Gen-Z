@@ -1,6 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 body {
-    background: #B1A296;
+    background: #b2c5a2;
     font-size: 0.5em;
+    font-family: "Baloo 2", cursive;
 }
 
 li.nav-item{

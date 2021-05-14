@@ -1,14 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
 body 
 {
     /* display: flex; */
+    font-family: "Baloo 2", cursive;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #B1A296;
+    background: #b2c5a2;
     font-size: 16px;
 }
 .contact-form{
-    background: #fff;
+    background: #5a693d;
     margin-top: 10%;
     margin-bottom: 5%;
     width: 70%;
@@ -35,14 +37,14 @@ body
     margin-bottom: 8%;
     margin-top: -10%;
     text-align: center;
-    color: #0062cc;
+    color: #A8B875;
 }
 .contact-form .btnContact {
     width: 50%;
     border: none;
     border-radius: 1rem;
     padding: 1.5%;
-    background: #dc3545;
+    background: #A8B875;
     font-weight: 600;
     color: #fff;
     cursor: pointer;
@@ -53,7 +55,7 @@ body
     border-radius: 1rem;
     padding: 1.5%;
     color: #fff;
-    background-color: #0062cc;
+    background-color: #5a693d;
     border: none;
     cursor: pointer;
 }

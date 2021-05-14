@@ -2,7 +2,7 @@
 
 body {
   margin-top: 20px;
-  background: #FEFFE8;
+  background: #b2c5a2;
   height: 100 !important;
   font-family: "Rubik", sans-serif;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 .bg-overlay {
-  background-color: #481f72 !important;
+  background-color: #5a693d !important;
   opacity: 0.7;
   position: absolute;
   top: 0;
