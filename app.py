@@ -108,7 +108,6 @@ def signup():
         with open("Static/img/default_pf.png", "rb") as f:
             data = f.read()
             picture = b64encode(data).decode("utf-8")
-            print("default pic added")
 
         user = Users.query.filter_by(username=username).first()
         if user:
@@ -142,14 +141,12 @@ def login():
         password = request.form.get('password')
 
         user = Users.query.filter_by(username=username).first()
-        print(user)
         if not user:
             flash("No such User found, Try Signing Up First", "warning")
             return redirect("/signup")
         if user:
             if check_password_hash(user.password, password):
                 login_user(user)
-                print("Login Done!")
                 return redirect("/allblogs")
             else:
                 flash("Incorrect password", "danger")
@@ -215,7 +212,6 @@ def addblog(user_id):
             with open("Static/img/default_blogpicture.jpeg", "rb") as f:
                 data = f.read()
                 picture = b64encode(data).decode("utf-8")
-                print("default pic added")
         else:
             picture = b64encode(picture.read()).decode("utf-8")
 
@@ -282,11 +278,8 @@ def searchusers():
 def save_excel(form_excel):
     _, f_ext = os.path.splitext(form_excel.filename)
     excel_fn = "sheet" + f_ext
-    print(excel_fn)
     excel_path = os.path.join(app.root_path, excel_fn)
-    print(excel_path)
     form_excel.save(excel_path)
-    print("form_picture Saved")
     return excel_fn
 
 
@@ -311,30 +304,9 @@ def addques():
             answer = row[5].value
             domain = row[6].value
 
-            print(f"Question:\n{question}")
-            print(f" {choice1}")
-            print(f" {choice2}")
-            print(f" {choice3}")
-            print(f" {choice4}")
-            print(f" {answer}\n")
-            print(f" {domain}\n")
-
             newques = Questions(question=question, domain=domain, choice1=choice1,
                                 choice2=choice2, choice3=choice3, choice4=choice4, answer=answer)
             db.session.add(newques)
-        #     cur.execute('insert into Quiz values(?,?,?,?,?,?,?)',
-        #             (Question,Choice1,Choice2,Choice3,Choice4,Answer,Domain))
-        # db.commit()
-        # db.close()
-
-        # question = request.form['question']
-        # domain = request.form['domain']
-        # choice1 = request.form['choice1']
-        # choice2 = request.form['choice2']
-        # choice3 = request.form['choice3']
-        # choice4 = request.form['choice4']
-        # answer = request.form['answer']
-
         db.session.commit()
         flash('Question added!')
         return redirect('/addques')
@@ -359,16 +331,14 @@ def submitquiz(user_id, domain):
         count = 0
         selected_options = []
         for question in question_list:
-            print(question_list)
+
             question.id = str(question.id)
 
             selected_option = request.form[question.id]
             selected_options.append(selected_option)
 
-            print("selected_option - ", selected_option)
             correct_option = question.answer
 
-            print("correct_option - ", correct_option)
             if selected_option == correct_option:
                 count = count+1
 
@@ -450,8 +420,6 @@ def submitquiz(user_id, domain):
         user.score = user.score + count
         db.session.commit()
 
-        print(selected_options)
-
         return render_template("show-quiz-score.html", question_list=question_list, selected_options=selected_options, current_user=current_user, current_quiz_score=current_quiz_score)
 
 
@@ -506,10 +474,9 @@ def userprofile(user_id):
 
         picture = request.files['profile']
         if picture.filename == "":
-            with open("Static/img/default_blogpicture.jpeg", "rb") as f:
+            with open("Static/img/default_pf.png", "rb") as f:
                 data = f.read()
                 user.profile = b64encode(data).decode("utf-8")
-                print("default pic added")
         else:
             user.profile = b64encode(picture.read()).decode("utf-8")
 
