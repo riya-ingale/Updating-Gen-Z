@@ -237,6 +237,7 @@ def allblogs():
         for blog in blogs:
             user = Users.query.filter_by(id=blog.user_id).first()
             blog.user_id = user.username
+            blog.likes=user.score
     return render_template('blogs.html', blogs=blogs, current_user=current_user)
 
 
