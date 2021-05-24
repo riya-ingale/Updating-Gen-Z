@@ -483,8 +483,7 @@ def userprofile(user_id):
 
         db.session.commit()
     return render_template('profile.html', user=user, current_user=current_user, blogs=blogs)
-
-
+#Comment
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
