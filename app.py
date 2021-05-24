@@ -13,8 +13,8 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 import requests
 from pygooglenews import GoogleNews
-# from base64 import b64encode, b64decode
-# import base64
+from base64 import b64encode, b64decode
+import base64
 import random
 from openpyxl import load_workbook
 
