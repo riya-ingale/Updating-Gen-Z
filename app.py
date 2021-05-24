@@ -3,19 +3,10 @@ from flask import make_response, session, g
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
-from io import BytesIO
 from werkzeug.security import generate_password_hash, check_password_hash
-import secrets
 import os
-from email.message import EmailMessage
 import datetime
-from urllib.request import Request, urlopen
-from bs4 import BeautifulSoup
-import requests
 from pygooglenews import GoogleNews
-from base64 import b64encode, b64decode
-import base64
-import random
 from openpyxl import load_workbook
 
 
@@ -104,10 +95,7 @@ def signup():
         hashed_password = generate_password_hash(password, method="sha256")
         cpassword = request.form['cpassword']
         mail_id = request.form['mail_id']
-
-        with open("Static/img/default_pf.png", "rb") as f:
-            data = f.read()
-            picture = b64encode(data).decode("utf-8")
+        picture = '../static/img/default_pf.png'
 
         user = Users.query.filter_by(username=username).first()
         if user:
@@ -207,13 +195,7 @@ def addblog(user_id):
         date = date.strftime("%d %B, %Y")
         post = request.form['post']
 
-        picture = request.files['picture']
-        if picture.filename == "":
-            with open("Static/img/default_blogpicture.jpeg", "rb") as f:
-                data = f.read()
-                picture = b64encode(data).decode("utf-8")
-        else:
-            picture = b64encode(picture.read()).decode("utf-8")
+        picture = "../static/img/default_blogpicture.jpeg"
 
         new_blog = Blog(user_id=user_id, title=title,
                         topic=domain, post=post, date=date, picture=picture)
@@ -237,7 +219,7 @@ def allblogs():
         for blog in blogs:
             user = Users.query.filter_by(id=blog.user_id).first()
             blog.user_id = user.username
-            blog.likes=user.score
+            blog.likes = user.score
     return render_template('blogs.html', blogs=blogs, current_user=current_user)
 
 
@@ -473,17 +455,11 @@ def userprofile(user_id):
         user.mobno = request.form['mobno']
         user.expertise = request.form['expertise']
 
-        picture = request.files['profile']
-        if picture.filename == "":
-            with open("Static/img/default_pf.png", "rb") as f:
-                data = f.read()
-                user.profile = b64encode(data).decode("utf-8")
-        else:
-            user.profile = b64encode(picture.read()).decode("utf-8")
-
         db.session.commit()
     return render_template('profile.html', user=user, current_user=current_user, blogs=blogs)
-#Comment
+
+
+# Comment
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
