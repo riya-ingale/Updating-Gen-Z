@@ -1,5 +1,5 @@
-from flask import Flask, render_template, url_for, request, redirect, session, flash, send_file
-from flask import make_response, session, g
+from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import session
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import or_
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
