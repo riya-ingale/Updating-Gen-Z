@@ -186,6 +186,7 @@ def news():
 
 
 @app.route('/addblog/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def addblog(user_id):
     if request.method == "POST":
         user_id = user_id
@@ -266,7 +267,7 @@ def save_excel(form_excel):
     return excel_fn
 
 
-@app.route('/addques', methods=['POST', 'GET'])
+@app.route('/admin/addques', methods=['POST', 'GET'])
 def addques():
     if request.method == "POST":
         sheet = request.files['Excel']
@@ -297,12 +298,14 @@ def addques():
 
 
 @app.route('/submitquiz/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def submitquizget(user_id):
     if request.method == "GET":
         return render_template('quiz.html', q=None, current_user=current_user)
 
 
 @app.route('/submitquiz/<int:user_id>/<domain>', methods=['POST', 'GET'])
+@login_required
 def submitquiz(user_id, domain):
     qlist = Questions.query.filter_by(domain=domain).all()
     # random_question_list = random.sample(qlist, 5)
@@ -407,6 +410,7 @@ def submitquiz(user_id, domain):
 
 
 @app.route('/todolist/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def todolist(user_id):
     show = None
     if request.method == "POST":
@@ -420,6 +424,7 @@ def todolist(user_id):
 
 
 @app.route('/showtodolist/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def showtodolist(user_id):
     user = Users.query.filter_by(id=user_id).first()
     tasklist = Tasks.query.filter_by(user_id=user_id).all()
@@ -427,6 +432,7 @@ def showtodolist(user_id):
 
 
 @app.route('/deletetask/<int:user_id>/<int:task_id>', methods=['POST'])
+@login_required
 def deletetask(user_id, task_id):
     task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
     db.session.delete(task)
@@ -436,6 +442,7 @@ def deletetask(user_id, task_id):
 
 
 @app.route('/finishtask/<int:user_id>/<int:task_id>', methods=['POST'])
+@login_required
 def finishtask(user_id, task_id):
     task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
     task.status = "Finished"
@@ -445,6 +452,7 @@ def finishtask(user_id, task_id):
 
 
 @app.route('/userprofile/<int:user_id>', methods=['POST', 'GET'])
+@login_required
 def userprofile(user_id):
     user = Users.query.filter_by(id=user_id).first()
     blogs = Blog.query.filter_by(user_id=user_id).all()
@@ -457,9 +465,12 @@ def userprofile(user_id):
 
         db.session.commit()
     return render_template('profile.html', user=user, current_user=current_user, blogs=blogs)
+
+
 @app.route('/aboutus')
 def aboutus():
     return render_template('aboutus.html', current_user=current_user)
+
 
 # Comment
 if __name__ == "__main__":
