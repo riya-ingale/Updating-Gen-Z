@@ -457,7 +457,9 @@ def userprofile(user_id):
 
         db.session.commit()
     return render_template('profile.html', user=user, current_user=current_user, blogs=blogs)
-
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html', current_user=current_user)
 
 # Comment
 if __name__ == "__main__":

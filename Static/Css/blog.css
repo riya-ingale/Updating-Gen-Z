@@ -6,6 +6,7 @@ body {
   text-rendering: optimizeLegibility;
   background: #b2c5a2;
   font-weight: initial;
+  font-size: 16px;;
 }
 li.nav-item{
   font-size: medium !important;
