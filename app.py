@@ -146,12 +146,12 @@ def login():
 def logout():
     logout_user()
     flash("Successfully Logged out!")
-    return redirect('/login')
+    return redirect('/')
 
 
 @app.route('/')
 def index():
-    return render_template('index.html', current_user=current_user)
+    return render_template('Index.html', current_user=current_user)
 
 
 @app.route('/news', methods=['GET', 'POST'])
@@ -267,7 +267,7 @@ def save_excel(form_excel):
     return excel_fn
 
 
-@app.route('/admin/addques', methods=['POST', 'GET'])
+@app.route('/addques', methods=['POST', 'GET'])
 def addques():
     if request.method == "POST":
         sheet = request.files['Excel']
@@ -307,7 +307,9 @@ def submitquizget(user_id):
 @app.route('/submitquiz/<int:user_id>/<domain>', methods=['POST', 'GET'])
 @login_required
 def submitquiz(user_id, domain):
-    qlist = Questions.query.filter_by(domain=domain).all()
+    qlist = Questions.query.filter_by(domain=domain).order_by(
+        Questions.id.desc()).limit(5).all()
+
     # random_question_list = random.sample(qlist, 5)
     question_list = qlist
     if request.method == "GET":
@@ -402,7 +404,6 @@ def submitquiz(user_id, domain):
             user.score = 0
 
         current_quiz_score = count
-        max_score = len(question_list)
         user.score = user.score + count
         db.session.commit()
 
@@ -437,7 +438,6 @@ def deletetask(user_id, task_id):
     task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
     db.session.delete(task)
     db.session.commit()
-    tasklist = Tasks.query.filter_by(user_id=user_id).all()
     return redirect(f'/showtodolist/{user_id}')
 
 
@@ -447,7 +447,6 @@ def finishtask(user_id, task_id):
     task = Tasks.query.filter_by(id=task_id, user_id=user_id).first()
     task.status = "Finished"
     db.session.commit()
-    tasklist = Tasks.query.filter_by(user_id=user_id).all()
     return redirect(f'/showtodolist/{user_id}')
 
 
@@ -472,7 +471,6 @@ def aboutus():
     return render_template('aboutus.html', current_user=current_user)
 
 
-# Comment
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True)
